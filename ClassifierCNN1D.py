@@ -51,27 +51,28 @@ class ClassifierCNN1D:
         # TODO more convolutional layers, extract more useful features
         model.add(keras.layers.Conv1D(filters=20, kernel_size=50, activation='tanh', input_shape=(3000, 1), padding='same'))
         model.add(keras.layers.MaxPooling1D(pool_size=5))
-        #model.add(keras.layers.Dropout(0.3))
+        model.add(keras.layers.Dropout(0.2))
         model.add(keras.layers.Conv1D(filters=20, kernel_size=30, activation='tanh', kernel_initializer=self.init_weights, padding='same'))
         model.add(keras.layers.MaxPooling1D(pool_size=3))
-        #model.add(keras.layers.Dropout(0.3))
-        #model.add(keras.layers.Conv1D(filters=10, kernel_size=20, activation='tanh', kernel_initializer=self.init_weights, padding='same'))
-        #model.add(keras.layers.MaxPooling1D(pool_size=2))
-        #model.add(keras.layers.Dropout(0.3))
+        model.add(keras.layers.Dropout(0.2))
+        model.add(keras.layers.Conv1D(filters=10, kernel_size=20, activation='tanh', kernel_initializer=self.init_weights, padding='same'))
+        model.add(keras.layers.MaxPooling1D(pool_size=2))
+        model.add(keras.layers.Dropout(0.2))
         model.add(keras.layers.Flatten())
-        model.add(keras.layers.Dense(120, activation='tanh'))
+        model.add(keras.layers.Dense(150, activation='relu'))
+        model.add(keras.layers.Dense(120, activation='relu'))
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
         opt = keras.optimizers.Adam(lr=0.005, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=5, verbose=0,
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0,
                                                        mode='auto', baseline=None)
         model.fit(self.data_training,
                   self.label_training,
-                  epochs=50,
-                  batch_size=50,
+                  epochs=100,
+                  batch_size=40,
                   shuffle=True,
                   callbacks=[early_stopping])
 
