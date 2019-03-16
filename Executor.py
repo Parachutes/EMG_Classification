@@ -16,8 +16,8 @@ data_testing_window_cnn = []
 labels_testing_window_cnn = []
 
 
-Utility.collect_data_with_windowing_per_channel(directory_cnn_windowing, data_training_window_cnn, labels_training_window_cnn, ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"], ["1","2"])
-Utility.collect_testing_data_with_windowing_per_channel(directory_cnn_windowing, data_testing_window_cnn, labels_testing_window_cnn, ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"], ["3"])
+Utility.collect_data_with_windowing_per_channel(directory_cnn_windowing, data_training_window_cnn, labels_training_window_cnn, ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"], ["2","3"])
+Utility.collect_testing_data_with_windowing_per_channel(directory_cnn_windowing, data_testing_window_cnn, labels_testing_window_cnn, ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"], ["1"])
 
 
 classifierCNN1D = ClassifierCNN1D(data_training_window_cnn, labels_training_window_cnn, data_testing_window_cnn)
