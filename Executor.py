@@ -1,7 +1,6 @@
 import Utility
 import os
 import csv
-from scipy import misc
 from ClassifierCNN1D import ClassifierCNN1D
 import numpy as np
 from tensorflow import keras
