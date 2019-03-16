@@ -1,7 +1,4 @@
-import pywt
 import numpy as np
-#from statsmodels.tsa.ar_model import AR
-from scipy.stats import skew
 import os
 import csv
 from tensorflow import keras
