@@ -67,7 +67,7 @@ class ClassifierCNN1D:
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=4, verbose=0,
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=50, verbose=0,
                                                        mode='auto', baseline=None)
         model.fit(self.data_training,
                   self.label_training,
