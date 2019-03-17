@@ -37,7 +37,7 @@ class ClassifierCNN1D:
 
 
     def __init__(self, data_training, label_training, data_testing):
-        self.data_training = np.array(data_training).reshape(len(data_training), 4000, 1)
+        self.data_training = np.array(data_training).reshape(len(data_training), 4000, 8)
         self.label_training = [Utility.label_str2array(l) for l in label_training]
         self.label_training = np.array(self.label_training).reshape(len(label_training), 15)
 
@@ -81,7 +81,7 @@ class ClassifierCNN1D:
 
         # Do the prediction
         for d_t in self.data_testing:
-            d_t = np.array(d_t).reshape(len(d_t), 4000, 1)
+            d_t = np.array(d_t).reshape(len(d_t), 4000, 8)
             prediction = model.predict(d_t)
             prediction = [Utility.label_num2str(np.argmax(p)) for p in prediction]
             self.predictions.append(max(set(prediction), key=prediction.count))
