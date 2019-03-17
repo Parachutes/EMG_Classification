@@ -32,7 +32,7 @@ class ClassifierCNN1D:
     predictions = []
 
     init_weights = keras.initializers.glorot_normal(seed=1);
-    regularizer = keras.regularizers.l2(l=0.0001)
+    regularizer = keras.regularizers.l2(l=0.00015)
 
 
 
@@ -67,7 +67,7 @@ class ClassifierCNN1D:
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=50, verbose=0,
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0,
                                                        mode='auto', baseline=None)
         model.fit(self.data_training,
                   self.label_training,
