@@ -26,7 +26,7 @@ def read_csv(f):
 
 
 #TODO another collection function/ collect data per channel!
-def collect_data_with_windowing_per_channel(directory, data, labels, subject, index):
+def collect_data_with_windowing(directory, data, labels, subject, index):
     for filename in os.listdir(directory):
         for s in subject:
             for i in index:
@@ -36,11 +36,10 @@ def collect_data_with_windowing_per_channel(directory, data, labels, subject, in
                     f = open(filename)
                     matrix = np.array(read_csv(f))
                     label = os.path.splitext(filename)[0][3:6]
-                    for i in range(8):
-                        data.append(matrix[i].flatten())
-                        labels.append(label)
+                    data.append(matrix)
+                    labels.append(label)
 
-def collect_testing_data_with_windowing_per_channel(directory, data, labels, subject, index):
+def collect_testing_data_with_windowing(directory, data, labels, subject, index):
     for s in subject:
         for m in ["HC_", "I_I", "I_M", "IMR", "L_L", "M_M", "M_R", "MRL", "R_L", "R_R", "T_I", "T_L", "T_M", "T_R", "T_T"]:
             for i in index:
@@ -51,8 +50,7 @@ def collect_testing_data_with_windowing_per_channel(directory, data, labels, sub
                         os.chdir(directory)
                         f = open(filename)
                         matrix = np.array(read_csv(f))
-                        for y in range(8):
-                            combination_matrix.append(matrix[y].flatten())
+                        combination_matrix.append(matrix)
                 data.append(combination_matrix)
                 labels.append(m)
 

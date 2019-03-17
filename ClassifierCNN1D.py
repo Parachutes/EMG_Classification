@@ -49,12 +49,12 @@ class ClassifierCNN1D:
     def train_the_model(self):
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
-        model.add(keras.layers.Conv1D(filters=5, kernel_size=10, activation='tanh', input_shape=(4000, 1), padding='same'))
-        model.add(keras.layers.MaxPooling1D(pool_size=4))
-        model.add(keras.layers.Conv1D(filters=3, kernel_size=5, activation='tanh', padding='same'))
-        model.add(keras.layers.MaxPooling1D(pool_size=2))
-        model.add(keras.layers.Conv1D(filters=2, kernel_size=3, activation='tanh', padding='same'))
-        model.add(keras.layers.MaxPooling1D(pool_size=2))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(50,8), activation='tanh', input_shape=(4000,8), padding='same'))
+        model.add(keras.layers.MaxPooling2D(pool_size=(4,2)))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(20,4), activation='tanh', padding='same'))
+        model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(10,2), activation='tanh', padding='same'))
+        model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Flatten())
         model.add(keras.layers.Dense(200, activation='tanh'))
         model.add(keras.layers.Dense(150, activation='tanh'))
@@ -68,8 +68,8 @@ class ClassifierCNN1D:
                                                        mode='auto', baseline=None)
         model.fit(self.data_training,
                   self.label_training,
-                  epochs=2000,
-                  batch_size=50,
+                  epochs=800,
+                  batch_size=20,
                   shuffle=True,
                   callbacks=[early_stopping])
 
