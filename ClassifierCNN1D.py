@@ -32,7 +32,7 @@ class ClassifierCNN1D:
     predictions = []
 
     init_weights = keras.initializers.glorot_normal(seed=1);
-    regularizer = keras.regularizers.l2(l=0.00005)
+    regularizer = keras.regularizers.l2(l=0.0001)
 
 
 
@@ -55,7 +55,7 @@ class ClassifierCNN1D:
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Conv2D(filters=5, kernel_size=(10,2), activation='tanh', padding='same', kernel_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
-        model.add(keras.layers.Dropout(0.4))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Flatten())
         model.add(keras.layers.Dense(200, activation='tanh', kernel_regularizer=self.regularizer))
         model.add(keras.layers.Dense(150, activation='tanh', kernel_regularizer=self.regularizer))
