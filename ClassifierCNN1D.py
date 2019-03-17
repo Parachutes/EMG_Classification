@@ -32,7 +32,7 @@ class ClassifierCNN1D:
     predictions = []
 
     init_weights = keras.initializers.glorot_normal(seed=1);
-    regularizer = keras.regularizers.l2(l=0.0001)
+    regularizer = keras.regularizers.l2(l=0.00015)
 
 
 
