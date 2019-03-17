@@ -37,7 +37,7 @@ class ClassifierCNN1D:
 
 
     def __init__(self, data_training, label_training, data_testing):
-        self.data_training = np.array(data_training).reshape(len(data_training), 3000, 1)
+        self.data_training = np.array(data_training).reshape(len(data_training), 4000, 1)
         self.label_training = [Utility.label_str2array(l) for l in label_training]
         self.label_training = np.array(self.label_training).reshape(len(label_training), 15)
 
@@ -49,17 +49,22 @@ class ClassifierCNN1D:
     def train_the_model(self):
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
-        model.add(keras.layers.Conv1D(filters=50, kernel_size=50, activation='tanh', input_shape=(3000, 1), padding='same'))
-        model.add(keras.layers.MaxPooling1D(pool_size=5))
+        model.add(keras.layers.Conv1D(filters=50, kernel_size=5, activation='tanh', input_shape=(4000, 1), padding='same'))
+        model.add(keras.layers.MaxPooling1D(pool_size=4))
         model.add(keras.layers.Dropout(0.2))
-        model.add(keras.layers.Conv1D(filters=30, kernel_size=30, activation='tanh', input_shape=(3000, 1), padding='same'))
-        model.add(keras.layers.MaxPooling1D(pool_size=3))
+        model.add(keras.layers.Conv1D(filters=30, kernel_size=4, activation='tanh', padding='same'))
+        model.add(keras.layers.MaxPooling1D(pool_size=2))
+        model.add(keras.layers.Dropout(0.2))
+        model.add(keras.layers.Conv1D(filters=20, kernel_size=3, activation='tanh', padding='same'))
+        model.add(keras.layers.MaxPooling1D(pool_size=2))
         model.add(keras.layers.Dropout(0.2))
         model.add(keras.layers.Flatten())
         model.add(keras.layers.Dense(150, activation='tanh'))
         model.add(keras.layers.Dropout(0.3))
+        model.add(keras.layers.Dense(150, activation='tanh'))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
-        opt = keras.optimizers.Adam(lr=0.0005, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+        opt = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
@@ -68,7 +73,7 @@ class ClassifierCNN1D:
         model.fit(self.data_training,
                   self.label_training,
                   epochs=100,
-                  batch_size=40,
+                  batch_size=50,
                   shuffle=True,
                   callbacks=[early_stopping])
 
@@ -80,7 +85,7 @@ class ClassifierCNN1D:
 
         # Do the prediction
         for d_t in self.data_testing:
-            d_t = np.array(d_t).reshape(len(d_t), 3000, 1)
+            d_t = np.array(d_t).reshape(len(d_t), 4000, 1)
             prediction = model.predict(d_t)
             prediction = [Utility.label_num2str(np.argmax(p)) for p in prediction]
             self.predictions.append(max(set(prediction), key=prediction.count))
