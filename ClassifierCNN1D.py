@@ -51,8 +51,10 @@ class ClassifierCNN1D:
         # TODO more convolutional layers, extract more useful features
         model.add(keras.layers.Conv2D(filters=5, kernel_size=(50,8), activation='tanh', input_shape=(4000,8,1), padding='same', kernel_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(4,2)))
+        model.add(keras.layers.Dropout(0.2))
         model.add(keras.layers.Conv2D(filters=5, kernel_size=(20,4), activation='tanh', padding='same', kernel_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
+        model.add(keras.layers.Dropout(0.2))
         model.add(keras.layers.Conv2D(filters=5, kernel_size=(10,2), activation='tanh', padding='same', kernel_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.5))
@@ -65,7 +67,7 @@ class ClassifierCNN1D:
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=5, verbose=0,
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=4, verbose=0,
                                                        mode='auto', baseline=None)
         model.fit(self.data_training,
                   self.label_training,
