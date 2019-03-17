@@ -49,20 +49,16 @@ class ClassifierCNN1D:
     def train_the_model(self):
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
-        model.add(keras.layers.Conv1D(filters=50, kernel_size=5, activation='tanh', input_shape=(4000, 1), padding='same'))
+        model.add(keras.layers.Conv1D(filters=5, kernel_size=10, activation='tanh', input_shape=(4000, 1), padding='same'))
         model.add(keras.layers.MaxPooling1D(pool_size=4))
-        model.add(keras.layers.Dropout(0.2))
-        model.add(keras.layers.Conv1D(filters=30, kernel_size=4, activation='tanh', padding='same'))
+        model.add(keras.layers.Conv1D(filters=3, kernel_size=5, activation='tanh', padding='same'))
         model.add(keras.layers.MaxPooling1D(pool_size=2))
-        model.add(keras.layers.Dropout(0.2))
-        model.add(keras.layers.Conv1D(filters=20, kernel_size=3, activation='tanh', padding='same'))
+        model.add(keras.layers.Conv1D(filters=2, kernel_size=3, activation='tanh', padding='same'))
         model.add(keras.layers.MaxPooling1D(pool_size=2))
-        model.add(keras.layers.Dropout(0.2))
         model.add(keras.layers.Flatten())
+        model.add(keras.layers.Dense(200, activation='tanh'))
         model.add(keras.layers.Dense(150, activation='tanh'))
-        model.add(keras.layers.Dropout(0.3))
-        model.add(keras.layers.Dense(150, activation='tanh'))
-        model.add(keras.layers.Dropout(0.3))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
         opt = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         model.compile(loss='mean_squared_error',
@@ -72,7 +68,7 @@ class ClassifierCNN1D:
                                                        mode='auto', baseline=None)
         model.fit(self.data_training,
                   self.label_training,
-                  epochs=100,
+                  epochs=2000,
                   batch_size=50,
                   shuffle=True,
                   callbacks=[early_stopping])
