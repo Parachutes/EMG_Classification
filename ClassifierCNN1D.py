@@ -19,7 +19,7 @@ sess = tf.Session(graph=tf.get_default_graph(), config=session_conf)
 K.set_session(sess)
 
 
-
+#Highest => 97.5%
 
 
 
