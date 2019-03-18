@@ -49,10 +49,10 @@ class ClassifierCNN1D:
     def train_the_model(self):
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
-        model.add(keras.layers.Conv2D(filters=40, kernel_size=(20,4), activation='tanh', input_shape=(4000,8,1), padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=20, kernel_size=(20,4), activation='tanh', input_shape=(4000,8,1), padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(4,2)))
         model.add(keras.layers.Dropout(0.2))
-        model.add(keras.layers.Conv2D(filters=30, kernel_size=(15,3), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=20, kernel_size=(15,3), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.2))
         model.add(keras.layers.Conv2D(filters=20, kernel_size=(10,2), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
@@ -72,7 +72,7 @@ class ClassifierCNN1D:
         model.fit(self.data_training,
                   self.label_training,
                   epochs=800,
-                  batch_size=30,
+                  batch_size=20,
                   shuffle=True,
                   callbacks=[early_stopping])
 
