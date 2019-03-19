@@ -8,15 +8,15 @@ import random as rn
 
 
 #To avoid the randomness
-import os
-os.environ['PYTHONHASHSEED']=str(1)
-np.random.seed(1)
-rn.seed(1)
-session_conf = tf.ConfigProto(intra_op_parallelism_threads=1, inter_op_parallelism_threads=1)
-from keras import backend as K
-tf.set_random_seed(1)
-sess = tf.Session(graph=tf.get_default_graph(), config=session_conf)
-K.set_session(sess)
+# import os
+# os.environ['PYTHONHASHSEED']=str(1)
+# np.random.seed(1)
+# rn.seed(1)
+# session_conf = tf.ConfigProto(intra_op_parallelism_threads=1, inter_op_parallelism_threads=1)
+# from keras import backend as K
+# tf.set_random_seed(1)
+# sess = tf.Session(graph=tf.get_default_graph(), config=session_conf)
+# K.set_session(sess)
 
 
 #Highest => 97.5%
@@ -32,7 +32,7 @@ class ClassifierCNN1D:
     predictions = []
 
     init_weights = keras.initializers.glorot_normal(seed=1);
-    regularizer = keras.regularizers.l2(l=0.0001)
+    regularizer = keras.regularizers.l2(l=0.00012)
 
 
 
@@ -49,9 +49,9 @@ class ClassifierCNN1D:
     def train_the_model(self):
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
-        model.add(keras.layers.Conv2D(filters=10, kernel_size=(50,8), activation='tanh', input_shape=(4000,8,1), padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=15, kernel_size=(50,8), activation='tanh', input_shape=(4000,8,1), padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(4,2)))
-        model.add(keras.layers.Dropout(0.2))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Conv2D(filters=10, kernel_size=(30,4), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.3))
