@@ -21,8 +21,9 @@ Utility.collect_testing_data_with_windowing(directory_cnn_windowing, data_testin
 #Utility.collect_data_with_windowing(directory_cnn_windowing, data_testing_window_cnn, labels_testing_window_cnn, ["S1", "S2", "S3","S4", "S5", "S6","S7", "S8"], ["3"])
 
 classifierCNN1D = ClassifierCNN1D(data_training_window_cnn, labels_training_window_cnn, data_testing_window_cnn)
-classifierCNN1D.train_the_model()
-print("The CNN1D Accuracy: ", Utility.get_accuracy(classifierCNN1D.get_predictions(), labels_testing_window_cnn))
+print(classifierCNN1D.data_training.shape)
+#classifierCNN1D.train_the_model()
+#print("The CNN1D Accuracy: ", Utility.get_accuracy(classifierCNN1D.get_predictions(), labels_testing_window_cnn))
 
 
 
