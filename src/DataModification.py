@@ -102,7 +102,7 @@ def write_raw_windowing(crop_size, window_size, interval):
             #Do the normalization
             #norm_matrix = keras.utils.normalize(cropped_matrix)
             
-            components_list = data_windowing(norm_matrix, window_size, interval)
+            components_list = data_windowing(cropped_matrix, window_size, interval)
             cropped_filename = os.path.splitext(filename)[0][0:7] + "_"
             counter = 0
             for component in components_list:
