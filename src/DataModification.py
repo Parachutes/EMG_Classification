@@ -162,5 +162,5 @@ def write_features_windowing(crop_size, window_size, interval):
 
 
 
-#write_raw_windowing(20000, 4000, 1000)
-#write_features_windowing(80000, 20000, 6000)
+write_raw_windowing(20000, 4000, 1000)
+write_features_windowing(80000, 20000, 6000)
