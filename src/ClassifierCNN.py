@@ -22,7 +22,7 @@ class ClassifierCNN:
 
     predictions = []
 
-    regularizer = keras.regularizers.l2(l=0.00015)
+    regularizer = keras.regularizers.l2(l=0.0001)
 
 
 
@@ -37,10 +37,9 @@ class ClassifierCNN:
     def train_the_model(self):
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
-        model.add(keras.layers.Conv2D(filters=5, kernel_size=(8,50), activation='tanh', input_shape=self.data_training[0].shape, padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=15, kernel_size=(8,40), activation='tanh', input_shape=self.data_training[0].shape, padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,4)))
-        model.add(keras.layers.Dropout(0.2))
-        model.add(keras.layers.Conv2D(filters=5, kernel_size=(4,20), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=10, kernel_size=(4,20), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Conv2D(filters=5, kernel_size=(2,10), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
