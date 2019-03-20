@@ -19,34 +19,37 @@ class ClassifierCNN:
     data_training = []
     label_training = []
     data_testing = []
+
     predictions = []
+
+    init_weights = keras.initializers.glorot_normal(seed=1);
     regularizer = keras.regularizers.l2(l=0.00012)
 
-    #Constructor
+
+
     def __init__(self, data_training, label_training, data_testing):
-
         self.data_training = np.array(data_training).reshape(len(data_training),4000,8,1)
-
         self.label_training = [Utility.label_str2array(l) for l in label_training]
         self.label_training = np.array(self.label_training).reshape(len(label_training), 15)
+
         self.data_testing = data_testing
 
-    #Train the neural network
+
     def train_the_model(self):
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
-        model.add(keras.layers.Conv2D(filters=15, kernel_size=(50,8), activation='relu', input_shape=(4000,8,1), padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=15, kernel_size=(50,8), activation='tanh', input_shape=(4000,8,1), padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(4,2)))
         model.add(keras.layers.Dropout(0.3))
-        model.add(keras.layers.Conv2D(filters=10, kernel_size=(30,4), activation='relu', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=10, kernel_size=(30,4), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.3))
-        model.add(keras.layers.Conv2D(filters=5, kernel_size=(10,2), activation='relu', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(10,2), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Flatten())
-        model.add(keras.layers.Dense(200, activation='relu', kernel_regularizer=self.regularizer))
-        model.add(keras.layers.Dense(150, activation='relu', kernel_regularizer=self.regularizer))
+        model.add(keras.layers.Dense(200, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
+        model.add(keras.layers.Dense(150, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
         opt = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
@@ -62,6 +65,12 @@ class ClassifierCNN:
                   shuffle=True,
                   callbacks=[early_stopping])
 
+
+
+
+
+
+
         # Do the prediction
         for d_t in self.data_testing:
             d_t = np.array(d_t).reshape(len(d_t),4000,8,1)
@@ -69,6 +78,12 @@ class ClassifierCNN:
             prediction = [Utility.label_num2str(np.argmax(p)) for p in prediction]
             self.predictions.append(max(set(prediction), key=prediction.count))
 
+
+    
+    
+    
+    
+    
 
     #To get the prediction through the model
     def get_predictions(self):
