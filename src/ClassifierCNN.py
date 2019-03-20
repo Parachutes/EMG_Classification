@@ -37,13 +37,12 @@ class ClassifierCNN:
     def train_the_model(self):
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
-        model.add(keras.layers.Conv2D(filters=20, kernel_size=(6,40), activation='relu', input_shape=self.data_training[0].shape, padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=50, kernel_size=(6,40), activation='relu', input_shape=self.data_training[0].shape, padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,4)))
-        model.add(keras.layers.Conv2D(filters=15, kernel_size=(4,20), activation='relu', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=30, kernel_size=(4,20), activation='relu', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Conv2D(filters=10, kernel_size=(3,10), activation='relu', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
-        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Flatten())
         model.add(keras.layers.Dense(250, activation='relu', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
         model.add(keras.layers.Dropout(0.3))
