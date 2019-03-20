@@ -37,19 +37,20 @@ class ClassifierCNN:
     def train_the_model(self):
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
-        model.add(keras.layers.Conv2D(filters=15, kernel_size=(8,40), activation='relu', input_shape=self.data_training[0].shape, padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=20, kernel_size=(6,40), activation='relu', input_shape=self.data_training[0].shape, padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,4)))
-        model.add(keras.layers.Conv2D(filters=10, kernel_size=(4,20), activation='relu', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=15, kernel_size=(4,20), activation='relu', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
-        model.add(keras.layers.Conv2D(filters=5, kernel_size=(2,10), activation='relu', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=10, kernel_size=(3,10), activation='relu', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
-        model.add(keras.layers.Dropout(0.5))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Flatten())
-        model.add(keras.layers.Dense(200, activation='relu', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
+        model.add(keras.layers.Dense(250, activation='relu', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Dense(150, activation='relu', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
-        model.add(keras.layers.Dropout(0.5))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
-        opt = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+        opt = keras.optimizers.Adam(lr=0.00015, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
