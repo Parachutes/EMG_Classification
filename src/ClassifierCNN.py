@@ -20,7 +20,7 @@ class ClassifierCNN:
 
     predictions = []
 
-    regularizer = keras.regularizers.l2(l=0.00012)
+    regularizer = keras.regularizers.l2(l=0.00015)
 
 
     def __init__(self, data_training, label_training, data_testing):
@@ -44,9 +44,9 @@ class ClassifierCNN:
         model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Flatten())
         model.add(keras.layers.Dense(200, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
-        model.add(keras.layers.Dropout(0.4))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(150, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
-        model.add(keras.layers.Dropout(0.4))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
         opt = keras.optimizers.Adam(lr=0.00015, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         model.compile(loss='mean_squared_error',
@@ -57,7 +57,7 @@ class ClassifierCNN:
         model.fit(self.data_training,
                   self.label_training,
                   epochs=800,
-                  batch_size=25,
+                  batch_size=30,
                   shuffle=True,
                   callbacks=[early_stopping])
 
