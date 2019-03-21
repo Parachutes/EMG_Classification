@@ -10,16 +10,6 @@ import random as rn
 import os
 from pathlib import Path
 
-# #To avoid the randomness
-# import os
-# os.environ['PYTHONHASHSEED']=str(1)
-# np.random.seed(1)
-# rn.seed(1)
-# session_conf = tf.ConfigProto(intra_op_parallelism_threads=1, inter_op_parallelism_threads=1)
-# from keras import backend as K
-# tf.set_random_seed(1)
-# sess = tf.Session(graph=tf.get_default_graph(), config=session_conf)
-# K.set_session(sess)
 
 
 
@@ -36,8 +26,6 @@ class ClassifierNN:
     predictions = []
     input_size = 0
 
-    #Initial weights
-    #init_weights = keras.initializers.glorot_normal(seed=1);
 
     regularizer = keras.regularizers.l2(l = 0.00001)
 
@@ -56,23 +44,23 @@ class ClassifierNN:
     def train_the_model(self):
         model = keras.models.Sequential()
         #The layers of NN
-        model.add(keras.layers.Dense(150, activation=tf.nn.relu, input_dim=self.input_size,
+        model.add(keras.layers.Dense(150, activation='relu', input_dim=self.input_size,
                                      kernel_regularizer = self.regularizer))
         model.add(keras.layers.Dropout(0.2))
-        model.add(keras.layers.Dense(120, activation=tf.nn.relu,
+        model.add(keras.layers.Dense(150, activation='relu',
                                      kernel_regularizer = self.regularizer))
         model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax,
                                      kernel_regularizer = self.regularizer))
         #Optimizers
-        opt = keras.optimizers.Adam(lr=0.0005)
+        opt = keras.optimizers.Adam(lr=0.0008)
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
         early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=50, verbose=0, mode='auto', baseline=None)
         model.fit(self.data_training, self.label_training,
                   epochs=2000,
-                  batch_size=5,
+                  batch_size=30,
                   callbacks=[early_stopping],
                   shuffle=False)
 
