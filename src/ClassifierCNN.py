@@ -39,8 +39,10 @@ class ClassifierCNN:
         # TODO more convolutional layers, extract more useful features
         model.add(keras.layers.Conv2D(filters=50, kernel_size=(6,40), activation='relu', input_shape=self.data_training[0].shape, padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,4)))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Conv2D(filters=30, kernel_size=(4,20), activation='relu', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Conv2D(filters=10, kernel_size=(3,10), activation='relu', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Flatten())
@@ -58,7 +60,7 @@ class ClassifierCNN:
         model.fit(self.data_training,
                   self.label_training,
                   epochs=800,
-                  batch_size=20,
+                  batch_size=40,
                   shuffle=True,
                   callbacks=[early_stopping])
 
