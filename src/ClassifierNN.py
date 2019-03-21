@@ -46,7 +46,7 @@ class ClassifierNN:
         #The layers of NN
         model.add(keras.layers.Dense(150, activation='relu', input_dim=self.input_size,
                                      kernel_regularizer = self.regularizer))
-        model.add(keras.layers.Dropout(0.2))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Dense(150, activation='relu',
                                      kernel_regularizer = self.regularizer))
         model.add(keras.layers.Dropout(0.4))
