@@ -55,12 +55,12 @@ class ClassifierCNN:
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=3, verbose=0,
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=4, verbose=0,
                                                        mode='auto', baseline=None)
         model.fit(self.data_training,
                   self.label_training,
                   epochs=800,
-                  batch_size=40,
+                  batch_size=35,
                   shuffle=True,
                   callbacks=[early_stopping])
 
