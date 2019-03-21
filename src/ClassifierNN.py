@@ -38,6 +38,9 @@ class ClassifierNN:
         self.label_training = [Utility.label_str2array(l) for l in label_training]
         self.label_training = np.array(self.label_training).reshape(len(label_training), 15)
         self.data_testing = data_testing
+        
+    def __del__(self):
+        self.predictions = []
 
 
     #This method is to train the nn model
@@ -49,18 +52,15 @@ class ClassifierNN:
         model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Dense(150, activation='relu',
                                      kernel_regularizer = self.regularizer))
-        model.add(keras.layers.Dropout(0.3))
-        model.add(keras.layers.Dense(100, activation='relu',
-                                     kernel_regularizer = self.regularizer))
         model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax,
                                      kernel_regularizer = self.regularizer))
         #Optimizers
-        opt = keras.optimizers.Adam(lr=0.0005)
+        opt = keras.optimizers.Adam(lr=0.0007)
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=20, verbose=0, mode='auto', baseline=None)
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=15, verbose=0, mode='auto', baseline=None)
         model.fit(self.data_training, self.label_training,
                   epochs=2000,
                   batch_size=30,
