@@ -38,8 +38,6 @@ class ClassifierNN:
         self.label_training = np.array(self.label_training).reshape(len(label_training), 15)
         self.data_testing = data_testing
         
-    def __del__(self):
-        self.predictions = []
 
 
     #This method is to train the nn model
