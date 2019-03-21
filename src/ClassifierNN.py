@@ -97,5 +97,11 @@ Utility.collect_data_with_windowing(path_dataset, x_train, y_train, ["S1", "S2",
 Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"], ["3"])
 
 classifierNN = ClassifierNN(x_train, y_train, x_test)
-classifierNN.train_the_model()
-print("The NN Accuracy: ", Utility.get_accuracy(classifierNN.get_predictions(), y_test))
+
+accuracies = []
+for i in range(10):
+    classifierNN.train_the_model()
+    accuracies.append(Utility.get_accuracy(classifierNN.get_predictions(), y_test))
+    print("The NN Accuracy: ", Utility.get_accuracy(classifierNN.get_predictions(), y_test))
+   
+print(accuracies)
