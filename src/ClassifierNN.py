@@ -103,6 +103,9 @@ accuracies = []
 for i in range(10):
     classifierNN = ClassifierNN(x_train, y_train, x_test)
     classifierNN.train_the_model()
-    accuracies.append(Utility.get_accuracy(classifierNN.get_predictions(), y_test))
-    print("The NN Accuracy: ", Utility.get_accuracy(classifierNN.get_predictions(), y_test))
+    result = Utility.get_accuracy(classifierNN.get_predictions(), y_test)
+    accuracies.append(result)
+    print("The NN Accuracy: ",result)
+print(accuracies)
 print(mean(accuracies))
+
