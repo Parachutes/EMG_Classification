@@ -100,7 +100,7 @@ Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1",
 
 
 accuracies = []
-for i in range(10):
+for i in range(5):
     classifierNN = ClassifierNN(x_train, y_train, x_test)
     classifierNN.train_the_model()
     result = Utility.get_accuracy(classifierNN.get_predictions(), y_test)
