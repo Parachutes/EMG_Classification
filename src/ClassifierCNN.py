@@ -22,7 +22,7 @@ class ClassifierCNN:
 
     predictions = []
 
-    regularizer = keras.regularizers.l2(l=0.0001)
+    regularizer = keras.regularizers.l2(l=0.00012)
 
 
 
@@ -37,13 +37,13 @@ class ClassifierCNN:
     def train_the_model(self):
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
-        model.add(keras.layers.Conv2D(filters=10, kernel_size=(8,50), activation='tanh', input_shape=self.data_training[0].shape, padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(8,50), activation='tanh', input_shape=self.data_training[0].shape, padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,4)))
-        model.add(keras.layers.Dropout(0.2))
-        model.add(keras.layers.Conv2D(filters=10, kernel_size=(4,20), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Dropout(0.3))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(4,20), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
-        model.add(keras.layers.Dropout(0.2))
-        model.add(keras.layers.Conv2D(filters=10, kernel_size=(2,10), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Dropout(0.3))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(2,10), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Flatten())
@@ -51,11 +51,11 @@ class ClassifierCNN:
         model.add(keras.layers.Dense(150, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
-        opt = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+        opt = keras.optimizers.Adam(lr=0.00015, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=4, verbose=0,
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0,
                                                        mode='auto', baseline=None)
         model.fit(self.data_training,
                   self.label_training,
