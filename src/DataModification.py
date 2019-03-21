@@ -99,9 +99,6 @@ def write_raw_windowing(crop_size, window_size, interval):
             rotated_matrix = rotate_raw_data(original_matrix_norm)
             cropped_matrix = crop_data(rotated_matrix, crop_size)
             
-            #Do the normalization
-            #norm_matrix = keras.utils.normalize(cropped_matrix)
-            
             components_list = data_windowing(cropped_matrix, window_size, interval)
             cropped_filename = os.path.splitext(filename)[0][0:7] + "_"
             counter = 0
@@ -168,5 +165,5 @@ def write_features_windowing(crop_size, window_size, interval):
 
 
 
-#write_raw_windowing(20000, 4000, 1000)
-write_features_windowing(80000, 20000, 4000)
+write_raw_windowing(20000, 4000, 800)
+#write_features_windowing(80000, 20000, 4000)
