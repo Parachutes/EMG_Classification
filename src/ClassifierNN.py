@@ -53,7 +53,7 @@ class ClassifierNN:
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax,
                                      kernel_regularizer = self.regularizer))
         #Optimizers
-        opt = keras.optimizers.Adam(lr=0.0008)
+        opt = keras.optimizers.Adam(lr=0.0005)
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
