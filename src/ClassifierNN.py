@@ -9,7 +9,7 @@ from tensorflow import keras
 import random as rn
 import os
 from pathlib import Path
-
+from statistics import mean
 
 
 
@@ -104,4 +104,4 @@ for i in range(10):
     accuracies.append(Utility.get_accuracy(classifierNN.get_predictions(), y_test))
     print("The NN Accuracy: ", Utility.get_accuracy(classifierNN.get_predictions(), y_test))
    
-print(accuracies)
+print(mean(accuracies))
