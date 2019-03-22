@@ -8,7 +8,7 @@ import random as rn
 from pathlib import Path
 import os
 
-
+from sklearn.model_selection import train_test_split
 
 
 
@@ -32,6 +32,11 @@ class ClassifierCNN:
 
 
     def train_the_model(self):
+        
+        
+        x_train, x_valid, y_train, y_valid = train_test_split(self.data_training, self.label_training, test_size=0.3, shuffle= True)
+        
+        
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
         model.add(keras.layers.Conv2D(filters=10, kernel_size=(8,80), activation='tanh', input_shape=self.data_training[0].shape, padding='same'))
@@ -49,13 +54,14 @@ class ClassifierCNN:
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0,
+        early_stopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=5, verbose=0,
                                                        mode='auto', baseline=None)
-        model.fit(self.data_training,
-                  self.label_training,
+        model.fit(x_train,
+                  y_train,
                   epochs=800,
-                  batch_size=20,
+                  batch_size=30,
                   shuffle=True,
+                  validation_data=(x_valid, y_valid),
                   callbacks=[early_stopping])
 
 
