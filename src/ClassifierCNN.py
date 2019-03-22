@@ -34,14 +34,14 @@ class ClassifierCNN:
     def train_the_model(self):
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
-        model.add(keras.layers.Conv2D(filters=5, kernel_size=(4,4), activation='tanh', input_shape=self.data_training[0].shape, padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=10, kernel_size=(8,8), activation='tanh', input_shape=self.data_training[0].shape, padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,4)))
         model.add(keras.layers.Dropout(0.4))
-        model.add(keras.layers.Conv2D(filters=5, kernel_size=(4,4), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=10, kernel_size=(4,4), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,4)))
         model.add(keras.layers.Dropout(0.4))
-        model.add(keras.layers.Conv2D(filters=5, kernel_size=(2,2), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
-        model.add(keras.layers.Dropout(0.4))
+        model.add(keras.layers.Conv2D(filters=10, kernel_size=(2,2), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Flatten())
         model.add(keras.layers.Dense(200, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
         model.add(keras.layers.Dropout(0.5))
@@ -52,7 +52,7 @@ class ClassifierCNN:
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=8, verbose=0,
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=20, verbose=0,
                                                        mode='auto', baseline=None)
         model.fit(self.data_training,
                   self.label_training,
