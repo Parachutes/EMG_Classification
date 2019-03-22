@@ -12,7 +12,7 @@ import os
 
 class ClassifierCNN:
 
-data_training = []
+    data_training = []
     label_training = []
     data_testing = []
 
