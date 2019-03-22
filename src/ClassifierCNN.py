@@ -12,82 +12,72 @@ import os
 
 class ClassifierCNN:
 
-    data_training = []
+data_training = []
     label_training = []
     data_testing = []
 
     predictions = []
 
-    regularizer = keras.regularizers.l2(l=0.00015)
+    init_weights = keras.initializers.glorot_normal(seed=1);
+    regularizer = keras.regularizers.l2(l=0.0001)
+
 
 
     def __init__(self, data_training, label_training, data_testing):
-        self.data_training = np.array(data_training).reshape(np.array(data_training).shape + (1,))
+        self.data_training = np.array(data_training).reshape(len(data_training),4000,8,1)
         self.label_training = [Utility.label_str2array(l) for l in label_training]
         self.label_training = np.array(self.label_training).reshape(len(label_training), 15)
 
         self.data_testing = data_testing
 
 
+
+
     def train_the_model(self):
-        
-        
         model = keras.models.Sequential()
         # TODO more convolutional layers, extract more useful features
-        model.add(keras.layers.Conv2D(filters=10, kernel_size=(6,30), activation='tanh', input_shape=self.data_training[0].shape, padding='same'))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(50,8), activation='tanh', input_shape=(4000,8,1), padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.MaxPooling2D(pool_size=(4,2)))
         model.add(keras.layers.Dropout(0.2))
-        model.add(keras.layers.MaxPooling2D(pool_size=(2,4)))
-        model.add(keras.layers.Conv2D(filters=10, kernel_size=(4,20), activation='tanh', padding='same'))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(20,4), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.2))
-        model.add(keras.layers.MaxPooling2D(pool_size=(2,4)))
-        model.add(keras.layers.Conv2D(filters=10, kernel_size=(2,10), activation='tanh', padding='same'))
-        model.add(keras.layers.Dropout(0.3))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(10,2), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Flatten())
-        model.add(keras.layers.Dense(500, activation='relu'))
-        model.add(keras.layers.Dropout(0.3))
-        model.add(keras.layers.Dense(200, activation='relu'))
-        model.add(keras.layers.Dropout(0.3))
-        model.add(keras.layers.Dense(150, activation='relu'))
+        model.add(keras.layers.Dense(200, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
+        model.add(keras.layers.Dense(150, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
         opt = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=5, verbose=0,
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0,
                                                        mode='auto', baseline=None)
         model.fit(self.data_training,
                   self.label_training,
                   epochs=800,
-                  batch_size=30,
+                  batch_size=20,
                   shuffle=True,
                   callbacks=[early_stopping])
 
 
 
-
-
-
-
         # Do the prediction
         for d_t in self.data_testing:
-            d_t = np.array(d_t).reshape(np.array(d_t).shape + (1,))
+            d_t = np.array(d_t).reshape(len(d_t),4000,8,1)
             prediction = model.predict(d_t)
             prediction = [Utility.label_num2str(np.argmax(p)) for p in prediction]
             self.predictions.append(max(set(prediction), key=prediction.count))
 
 
-    
-    
-    
-    
-    
-
     #To get the prediction through the model
     def get_predictions(self):
         return self.predictions
 
-
+    
 
 
 #Script part
