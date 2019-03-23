@@ -27,7 +27,7 @@ class ClassifierKNN:
         
         for d_t in self.data_testing:
             d_t = [d.flatten() for d in d_t]
-            d_t = np.array(d_t)#.reshape(len(d_t), len(d_t[0]))
+            #d_t = np.array(d_t)
             prediction = neigh.predict(d_t)
             prediction = prediction.tolist()
             self.predictions.append(max(set(prediction), key=prediction.count))            
