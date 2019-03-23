@@ -72,7 +72,6 @@ def wavelet_analyse(data):
 def extract_features_1(data):
     feature_matrix = []
     for row in data:
-        #feature_matrix.append([Utility.get_mean_absolute_value(row), Utility.get_root_mean_square(row), Utility.get_waveform_length(row), Utility.get_willison_amplitude(row, 0.00002), Utility.get_skewness(row)])
         feature_matrix.append([Utility.get_mean_absolute_value(row), Utility.get_waveform_length(row), Utility.get_willison_amplitude(row, 0.00002), Utility.get_skewness(row)])
     return feature_matrix
 
@@ -130,7 +129,7 @@ def write_features_windowing(crop_size, window_size, interval):
 
                 wavelet_analysed_component = wavelet_analyse(component)
 
-                #(MAV + RMS + WL + WAMP + Skew)
+                #(MAV + WL + WAMP + Skew)
                 features_component_1 = extract_features_1(component)
                 #Wavelet(MAV + RMS)
                 features_component_2 = extract_features_2(wavelet_analysed_component)
@@ -158,10 +157,7 @@ def write_features_windowing(crop_size, window_size, interval):
                 print(">>>>", new_filename)
                 with open(new_filename, 'w', newline='') as f:
                     writer = csv.writer(f)
-                    
-                    #TODO
                     writer.writerows(features_list)
-                    #writer.writerows([features_list_1])
                     
                 counter = counter + 1
 
@@ -170,5 +166,5 @@ def write_features_windowing(crop_size, window_size, interval):
 
 
 
-#write_raw_windowing(20000, 4000, 1000)
+write_raw_windowing(20000, 4000, 1000)
 write_features_windowing(80000, 20000, 4000)
