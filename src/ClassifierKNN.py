@@ -18,7 +18,10 @@ class ClassifierKNN:
         self.label_training = label_training
         self.data_testing = data_testing
 
-    def get_predictions(self):        
+    def get_predictions(self):     
+        
+        print(len(data_training[0]))
+        
         neigh = KNeighborsClassifier(n_neighbors=5)
         neigh.fit(self.data_training, self.label_training)
         for d_t in self.data_testing:
