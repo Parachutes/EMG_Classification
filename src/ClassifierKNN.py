@@ -33,7 +33,7 @@ class ClassifierKNN:
 #             self.predictions.append(max(set(prediction), key=prediction.count))            
 #         return self.predictions
 
-        self.predictions = neigh.predict(data_testing)
+        self.predictions = neigh.predict(self.data_testing)
 
 
 
