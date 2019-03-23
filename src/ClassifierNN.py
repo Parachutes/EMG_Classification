@@ -35,7 +35,7 @@ class ClassifierNN:
     input_size = 0
 
 
-    regularizer = keras.regularizers.l2(l = 0.00008)
+    #regularizer = keras.regularizers.l2(l = 0.00001)
 
     #The constructor
     def __init__(self, data_training, label_training, data_testing):
@@ -53,25 +53,25 @@ class ClassifierNN:
     def train_the_model(self):
         model = keras.models.Sequential()
         #The layers of NN
-        model.add(keras.layers.Dense(180, activation='relu', input_dim=self.input_size,
-                                     kernel_regularizer = self.regularizer,
-                                     bias_regularizer = self.regularizer,
-                                     activity_regularizer = self.regularizer))
+        model.add(keras.layers.Dense(180, activation='relu', input_dim=self.input_size))#,
+                                     #kernel_regularizer = self.regularizer,
+                                     #bias_regularizer = self.regularizer,
+                                     #activity_regularizer = self.regularizer))
         #model.add(keras.layers.Dropout(0.4))
-        model.add(keras.layers.Dense(180, activation='relu',
-                                     kernel_regularizer = self.regularizer,
-                                     bias_regularizer = self.regularizer,
-                                     activity_regularizer = self.regularizer))
+        model.add(keras.layers.Dense(180, activation='relu'))#,
+                                     #kernel_regularizer = self.regularizer,
+                                     #bias_regularizer = self.regularizer,
+                                     #activity_regularizer = self.regularizer))
         #model.add(keras.layers.Dropout(0.4))
-        model.add(keras.layers.Dense(180, activation='relu',
-                                     kernel_regularizer = self.regularizer,
-                                     bias_regularizer = self.regularizer,
-                                     activity_regularizer = self.regularizer))
+        model.add(keras.layers.Dense(180, activation='relu'))#,
+                                     #kernel_regularizer = self.regularizer,
+                                     #bias_regularizer = self.regularizer,
+                                     #activity_regularizer = self.regularizer))
         model.add(keras.layers.Dropout(0.5))
-        model.add(keras.layers.Dense(15, activation=tf.nn.softmax,
-                                     kernel_regularizer = self.regularizer,
-                                     bias_regularizer = self.regularizer,
-                                     activity_regularizer = self.regularizer))
+        model.add(keras.layers.Dense(15, activation=tf.nn.softmax))#,
+                                     #kernel_regularizer = self.regularizer,
+                                     #bias_regularizer = self.regularizer,
+                                     #activity_regularizer = self.regularizer))
         #Optimizers
         opt = keras.optimizers.Adam(lr=0.0005)
         model.compile(loss='mean_squared_error',
