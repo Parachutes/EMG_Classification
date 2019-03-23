@@ -16,7 +16,8 @@ class ClassifierKNN:
     def __init__(self, data_training, label_training, data_testing):
         self.data_training = [d.flatten() for d in data_training]
         self.label_training = label_training
-        self.data_testing = data_testing
+        #self.data_testing = data_testing
+        self.data_testing = [d.flatten() for d in data_testing]
 
     def get_predictions(self):     
         
