@@ -29,13 +29,7 @@ class ClassifierKNN:
             d_t = np.array(d_t).reshape(len(d_t), len(d_t[0]))
             prediction = neigh.predict(d_t)
             prediction = prediction.tolist()
-            
-            
-            
-            self.predictions.append(max(set(prediction), key=prediction.count))
-            
-            print(max(set(prediction), key=prediction.count))
-            
+            self.predictions.append(max(set(prediction), key=prediction.count))            
         return self.predictions
 
 
