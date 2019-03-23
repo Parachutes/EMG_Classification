@@ -11,7 +11,16 @@ import os
 from pathlib import Path
 
 
-
+#To avoid the randomness
+import os
+os.environ['PYTHONHASHSEED']=str(1)
+np.random.seed(1)
+rn.seed(1)
+session_conf = tf.ConfigProto(intra_op_parallelism_threads=1, inter_op_parallelism_threads=1)
+from keras import backend as K
+tf.set_random_seed(1)
+sess = tf.Session(graph=tf.get_default_graph(), config=session_conf)
+K.set_session(sess)
 
 
 
