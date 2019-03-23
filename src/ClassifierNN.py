@@ -52,7 +52,7 @@ class ClassifierNN:
         #model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(150, activation='relu',
                                      kernel_regularizer = self.regularizer))
-        model.add(keras.layers.Dropout(0.4))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax,
                                      kernel_regularizer = self.regularizer))
         #Optimizers
