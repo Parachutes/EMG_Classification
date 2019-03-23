@@ -53,11 +53,11 @@ class ClassifierNN:
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax,
                                      kernel_regularizer = self.regularizer))
         #Optimizers
-        opt = keras.optimizers.Adam(lr=0.0005)
+        opt = keras.optimizers.Adam(lr=0.0007)
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0, mode='auto', baseline=None)
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=15, verbose=0, mode='auto', baseline=None)
         model.fit(self.data_training, self.label_training,
                   epochs=2000,
                   batch_size=30,
