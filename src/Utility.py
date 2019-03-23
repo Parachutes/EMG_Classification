@@ -17,7 +17,6 @@ def wavelet_analysis(channel):
     cA4, cD4, cD3, cD2, cD1 = coeffs
     #recD2 = pywt.waverec([cD2], 'db7')
     #wavelet_analysed_channel = [cA4, cD4, cD3, cD2, cD1, recD2]
-    
     recD1 = pywt.waverec([cD1], 'db7')
     recD2 = pywt.waverec([cD2], 'db7')
     wavelet_analysed_channel = [cA4, cD4, cD3, recD1, recD2]
