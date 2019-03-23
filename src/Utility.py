@@ -15,8 +15,13 @@ import re
 def wavelet_analysis(channel):
     coeffs = pywt.wavedec(channel, 'db7', level=4)
     cA4, cD4, cD3, cD2, cD1 = coeffs
+    #recD2 = pywt.waverec([cD2], 'db7')
+    #wavelet_analysed_channel = [cA4, cD4, cD3, cD2, cD1, recD2]
+    
+    recD1 = pywt.waverec([cD1], 'db7')
     recD2 = pywt.waverec([cD2], 'db7')
-    wavelet_analysed_channel = [cA4, cD4, cD3, cD2, cD1, recD2]
+    wavelet_analysed_channel = [recD1, recD2]
+    
     return wavelet_analysed_channel
 
 def get_mean_absolute_value(values):
