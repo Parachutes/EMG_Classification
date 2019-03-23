@@ -56,22 +56,22 @@ class ClassifierNN:
         model.add(keras.layers.Dense(180, activation='relu', input_dim=self.input_size,
                                      kernel_regularizer = self.regularizer,
                                      bias_regularizer = self.regularizer,
-                                     activity_regularize = self.regularizer))
+                                     activity_regularizer = self.regularizer))
         #model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(180, activation='relu',
                                      kernel_regularizer = self.regularizer,
                                      bias_regularizer = self.regularizer,
-                                     activity_regularize = self.regularizer))
+                                     activity_regularizer = self.regularizer))
         #model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(180, activation='relu',
                                      kernel_regularizer = self.regularizer,
                                      bias_regularizer = self.regularizer,
-                                     activity_regularize = self.regularizer))
+                                     activity_regularizer = self.regularizer))
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax,
                                      kernel_regularizer = self.regularizer,
                                      bias_regularizer = self.regularizer,
-                                     activity_regularize = self.regularizer))
+                                     activity_regularizer = self.regularizer))
         #Optimizers
         opt = keras.optimizers.Adam(lr=0.0005)
         model.compile(loss='mean_squared_error',
