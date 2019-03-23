@@ -49,7 +49,7 @@ class ClassifierNN:
         model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(200, activation='relu',
                                      kernel_regularizer = self.regularizer))
-        model.add(keras.layers.Dropout(0.4))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax,
                                      kernel_regularizer = self.regularizer))
         #Optimizers
@@ -60,7 +60,7 @@ class ClassifierNN:
         early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=15, verbose=0, mode='auto', baseline=None)
         model.fit(self.data_training, self.label_training,
                   epochs=2000,
-                  batch_size=30,
+                  batch_size=50,
                   callbacks=[early_stopping],
                   shuffle=True)
 
