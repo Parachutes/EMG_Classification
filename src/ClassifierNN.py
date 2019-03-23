@@ -50,10 +50,10 @@ class ClassifierNN:
         model.add(keras.layers.Dense(150, activation='relu',
                                      kernel_regularizer = self.regularizer))
         model.add(keras.layers.Dropout(0.3))
-        model.add(keras.layers.Dense(150, activation='tanh',
+        model.add(keras.layers.Dense(150, activation='relu',
                                      kernel_regularizer = self.regularizer))
         model.add(keras.layers.Dropout(0.3))
-        model.add(keras.layers.Dense(100, activation='tanh',
+        model.add(keras.layers.Dense(100, activation='relu',
                                      kernel_regularizer = self.regularizer))
         model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax,
