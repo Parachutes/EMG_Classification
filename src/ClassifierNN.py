@@ -46,7 +46,7 @@ class ClassifierNN:
         #The layers of NN
         model.add(keras.layers.Dense(150, activation='relu', input_dim=self.input_size,
                                      kernel_regularizer = self.regularizer))
-        #model.add(keras.layers.Dropout(0.3))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Dense(150, activation='relu',
                                      kernel_regularizer = self.regularizer))
         model.add(keras.layers.Dropout(0.3))
@@ -60,7 +60,7 @@ class ClassifierNN:
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=15, verbose=0, mode='auto', baseline=None)
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0, mode='auto', baseline=None)
         model.fit(self.data_training, self.label_training,
                   epochs=2000,
                   batch_size=30,
