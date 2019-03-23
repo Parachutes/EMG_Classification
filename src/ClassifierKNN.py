@@ -21,6 +21,7 @@ class ClassifierKNN:
     def get_predictions(self):     
         
         print(len(self.data_training[0]))
+        i = 1
         
         neigh = KNeighborsClassifier(n_neighbors=5)
         neigh.fit(self.data_training, self.label_training)
@@ -29,6 +30,12 @@ class ClassifierKNN:
             d_t = np.array(d_t).reshape(len(d_t), len(d_t[0]))
             prediction = neigh.predict(d_t)
             prediction = prediction.tolist()
+            
+            
+            print(prediction)
+            print(i)
+            i = i + 1
+            
             self.predictions.append(max(set(prediction), key=prediction.count))
         return self.predictions
 
