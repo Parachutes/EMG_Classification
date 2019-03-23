@@ -21,7 +21,7 @@ class ClassifierSVM:
 
 
     def get_predictions(self):
-        clf = svm.SVC(C = 10, gamma = 0.15)
+        clf = svm.SVC(C = 10, gamma = 0.1)
         clf.fit(self.data_training, self.label_training)
         for d_t in self.data_testing:
             d_t = [d.flatten() for d in d_t]
