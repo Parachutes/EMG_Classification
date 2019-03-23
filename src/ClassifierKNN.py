@@ -29,7 +29,10 @@ class ClassifierKNN:
             d_t = [d.flatten() for d in d_t]
             prediction = neigh.predict(d_t)
             prediction = prediction.tolist()
-            self.predictions.append(max(set(prediction), key=prediction.count))            
+            self.predictions.append(max(set(prediction), key=prediction.count))
+            
+            print(max(set(prediction), key=prediction.count))
+            
         return self.predictions
 
 
