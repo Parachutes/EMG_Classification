@@ -6,6 +6,17 @@ import os
 from pathlib import Path
 import Utility
 
+
+import random as rn
+To avoid the randomness
+import os
+os.environ['PYTHONHASHSEED']=str(1)
+np.random.seed(1)
+rn.seed(1)
+
+
+
+
 class ClassifierKNN:
 
     data_training = []
