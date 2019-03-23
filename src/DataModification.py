@@ -158,7 +158,7 @@ def write_features_windowing(crop_size, window_size, interval):
                 with open(new_filename, 'w', newline='') as f:
                     writer = csv.writer(f)
                     #writer.writerows(features_list)
-                    writer.writerows(features_list_2)
+                    writer.writerows([features_list_2])
                     
                 counter = counter + 1
 
