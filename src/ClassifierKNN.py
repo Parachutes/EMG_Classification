@@ -27,12 +27,8 @@ class ClassifierKNN:
             d_t = [d.flatten() for d in d_t]
             prediction = neigh.predict(d_t)
             prediction = prediction.tolist()
-            self.predictions.append(max(set(prediction), key=prediction.count))
-            
-            print(prediction)
-            print(">>>>>>>",max(set(prediction), key=prediction.count))
-            
-            
+            #!!!important:max() randomly choose one if two elements are tied, which causes th inconsistency 
+            self.predictions.append(max(set(prediction), key=prediction.count))           
         return self.predictions
 
 
