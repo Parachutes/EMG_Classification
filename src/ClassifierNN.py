@@ -53,7 +53,7 @@ class ClassifierNN:
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax,
                                      kernel_regularizer = self.regularizer))
         #Optimizers
-        opt = keras.optimizers.Adam(lr=0.0007)
+        opt = keras.optimizers.Adam(lr=0.0005)
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
@@ -68,7 +68,7 @@ class ClassifierNN:
         # Do the prediction
         for d_t in self.data_testing:
             d_t = [d.flatten() for d in d_t]
-            d_t = np.array(d_t).reshape(len(d_t), self.input_size)
+            #d_t = np.array(d_t).reshape(len(d_t), self.input_size)
             prediction = model.predict(d_t)
             prediction = [Utility.label_num2str(np.argmax(p)) for p in prediction]
             self.predictions.append(max(set(prediction), key=prediction.count))
