@@ -35,7 +35,7 @@ class ClassifierNN:
     input_size = 0
 
 
-    regularizer = keras.regularizers.l2(l = 0.00001)
+    regularizer = keras.regularizers.l2(l = 0.00003)
 
     #The constructor
     def __init__(self, data_training, label_training, data_testing):
@@ -61,7 +61,7 @@ class ClassifierNN:
         #model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(180, activation='relu',
                                      kernel_regularizer = self.regularizer))
-        model.add(keras.layers.Dropout(0.4))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax,
                                      kernel_regularizer = self.regularizer))
         #Optimizers
