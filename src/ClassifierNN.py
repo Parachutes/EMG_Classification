@@ -57,7 +57,7 @@ class ClassifierNN:
                                      #kernel_regularizer = self.regularizer,
                                      #bias_regularizer = self.regularizer,
                                      #activity_regularizer = self.regularizer))
-        #model.add(keras.layers.Dropout(0.4))
+        model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(180, activation='relu'))#,
                                      #kernel_regularizer = self.regularizer,
                                      #bias_regularizer = self.regularizer,
