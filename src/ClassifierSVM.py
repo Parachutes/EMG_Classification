@@ -25,7 +25,7 @@ class ClassifierSVM:
         clf.fit(self.data_training, self.label_training)
         for d_t in self.data_testing:
             d_t = [d.flatten() for d in d_t]
-            d_t = np.array(d_t).reshape(len(d_t), len(d_t[0]))
+            #d_t = np.array(d_t).reshape(len(d_t), len(d_t[0]))
             prediction = clf.predict(d_t)
             prediction = [Utility.label_num2str(p) for p in prediction]
             self.predictions.append(max(set(prediction), key=prediction.count))
