@@ -160,7 +160,7 @@ def write_features_windowing(crop_size, window_size, interval):
                     
                     #TODO
                     #writer.writerows(features_list)
-                    writer.writerows(features_list_1)
+                    writer.writerows([features_list_1])
                     
                 counter = counter + 1
 
