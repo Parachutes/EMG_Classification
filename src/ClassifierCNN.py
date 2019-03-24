@@ -62,7 +62,7 @@ class ClassifierCNN:
                                                        mode='auto', baseline=None)
         model.fit(self.data_training,
                   self.label_training,
-                  epochs=20,
+                  epochs=80,
                   batch_size=50,
                   shuffle=True,
                   callbacks=[early_stopping])
