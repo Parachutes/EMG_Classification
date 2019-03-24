@@ -54,11 +54,11 @@ class ClassifierCNN:
         model.add(keras.layers.Dense(150, activation='tanh'))
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
-        opt = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+        opt = keras.optimizers.Adam(lr=0.00015, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=30, verbose=0,
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0,
                                                        mode='auto', baseline=None)
         model.fit(self.data_training,
                   self.label_training,
