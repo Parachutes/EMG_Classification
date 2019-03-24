@@ -40,7 +40,7 @@ class ClassifierCNN:
     #Train the neural network
     def train_the_model(self):
         model = keras.models.Sequential()
-        model.add(keras.layers.Conv2D(filters = 15, kernel_size=(8,50), activation='tanh', input_shape=self.data_training[0].shape, padding='same))
+        model.add(keras.layers.Conv2D(filters = 15, kernel_size=(8,50), activation='tanh', input_shape=self.data_training[0].shape, padding='same'))
         model.add(keras.layers.MaxPooling2D(pool_size=(2, 5)))
         #model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Conv2D(filters = 10, kernel_size=(4,30), activation='tanh', padding='same'))
