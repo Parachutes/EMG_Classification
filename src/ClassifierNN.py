@@ -55,7 +55,7 @@ class ClassifierNN:
         model.add(keras.layers.Dropout(0.2))
         model.add(keras.layers.Dense(180, activation='relu'))
         model.add(keras.layers.Dropout(0.2))
-        model.add(keras.layers.Dense(180, activation='relu'))
+        model.add(keras.layers.Dense(150, activation='relu'))
         model.add(keras.layers.Dropout(0.2))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
         #Optimizers
