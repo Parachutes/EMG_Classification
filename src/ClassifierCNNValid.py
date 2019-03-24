@@ -33,7 +33,7 @@ class ClassifierCNN:
         
         self.data_testing = np.array(data_testing).reshape(np.array(data_testing).shape + (1,))
         self.label_testing = [Utility.label_str2array(l) for l in label_testing]
-        self.label_training = np.array(self.label_testing).reshape(len(label_testing), 15)
+        self.label_testing = np.array(self.label_testing).reshape(len(label_testing), 15)
     
     
 
