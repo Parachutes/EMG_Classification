@@ -50,6 +50,7 @@ class ClassifierCNN:
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Flatten())
         model.add(keras.layers.Dense(200, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
+        model.add(keras.layers.Dropout(0.2))
         model.add(keras.layers.Dense(150, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
@@ -62,7 +63,7 @@ class ClassifierCNN:
         model.fit(self.data_training,
                   self.label_training,
                   epochs=800,
-                  batch_size=20,
+                  batch_size=50,
                   shuffle=True,
                   callbacks=[early_stopping])
 
