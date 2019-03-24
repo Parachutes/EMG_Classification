@@ -54,10 +54,10 @@ class ClassifierNN:
         model = keras.models.Sequential()
         #The layers of NN
         model.add(keras.layers.Dense(180, activation='relu', input_dim=self.input_size))
-        model.add(keras.layers.Dropout(0.4))
+        #model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.Dense(180, activation='relu'))
-        model.add(keras.layers.Dropout(0.4))
+        #model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(180, activation='relu'))
         model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
