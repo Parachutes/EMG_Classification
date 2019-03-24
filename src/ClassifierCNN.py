@@ -10,7 +10,7 @@ import os
 
 
 
- class ClassifierCNN:
+class ClassifierCNN:
     
     data_training = []
     label_training = []
