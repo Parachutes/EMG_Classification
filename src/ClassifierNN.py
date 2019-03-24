@@ -57,7 +57,7 @@ class ClassifierNN:
         #model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.Dense(180, activation='relu'))
-        #model.add(keras.layers.Dropout(0.4))
+        model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(180, activation='relu'))
         model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
@@ -66,7 +66,7 @@ class ClassifierNN:
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=8, verbose=0, mode='auto', baseline=None)
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=5, verbose=0, mode='auto', baseline=None)
         model.fit(self.data_training, self.label_training,
                   epochs=2000,
                   batch_size=10,
