@@ -50,6 +50,7 @@ class ClassifierCNN:
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Flatten())
         model.add(keras.layers.Dense(200, activation='tanh'))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Dense(150, activation='tanh'))
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
