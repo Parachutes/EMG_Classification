@@ -11,7 +11,7 @@ import os
 from pathlib import Path
 
 
-#To avoid the randomness
+#To avoid some randomness
 import os
 os.environ['PYTHONHASHSEED']=str(1)
 np.random.seed(1)
@@ -34,8 +34,6 @@ class ClassifierNN:
     predictions = []
     input_size = 0
 
-
-    #regularizer = keras.regularizers.l2(l = 0.00001)
 
     #The constructor
     def __init__(self, data_training, label_training, data_testing):
