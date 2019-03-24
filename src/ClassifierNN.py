@@ -57,7 +57,7 @@ class ClassifierNN:
         model.add(keras.layers.Dropout(0.1))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.Dense(180, activation='relu'))
-        model.add(keras.layers.Dropout(0.1))
+        model.add(keras.layers.Dropout(0.2))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.Dense(180, activation='relu'))
         model.add(keras.layers.Dropout(0.2))
