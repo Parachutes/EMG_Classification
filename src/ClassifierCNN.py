@@ -41,10 +41,10 @@ class ClassifierCNN:
         # TODO more convolutional layers, extract more useful features
         model.add(keras.layers.Conv2D(filters=5, kernel_size=(50,8), activation='tanh', input_shape=(4000,8,1), padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(4,2)))
-        model.add(keras.layers.Dropout(0.2))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Conv2D(filters=5, kernel_size=(20,4), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
-        model.add(keras.layers.Dropout(0.2))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Conv2D(filters=5, kernel_size=(10,2), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.5))
