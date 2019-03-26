@@ -10,6 +10,7 @@ from tensorflow import keras
 import random as rn
 import os
 from pathlib import Path
+from keras.utils import plot_model
 
 
 #To avoid some randomness
@@ -70,6 +71,8 @@ class ClassifierNN:
                   batch_size=50,
                   callbacks=[early_stopping],
                   shuffle=True)
+        
+        plot_model(model, to_file='model.png')
 
 
         # Do the prediction
