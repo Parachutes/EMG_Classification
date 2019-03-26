@@ -60,14 +60,10 @@ class ClassifierCNN:
         model.add(keras.layers.Conv2D(filters=5, kernel_size=(10,2), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.5))
-        
-        #++
-        model.add(keras.layers.Conv2D(filters=2, kernel_size=(5,2), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
-        model.add(keras.layers.MaxPooling2D(pool_size=(2,1)))
-        #model.add(keras.layers.Dropout(0.5))
-        #++
+ 
         
         model.add(keras.layers.Flatten())
+        model.add(keras.layers.Dense(500, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
         model.add(keras.layers.Dense(200, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
         model.add(keras.layers.Dense(150, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
         model.add(keras.layers.Dropout(0.5))
