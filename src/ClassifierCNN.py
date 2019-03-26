@@ -87,9 +87,9 @@ class ClassifierCNN:
               self.predictions.append(max(set(prediction), key=prediction.count))
 
 
-#To get the prediction through the model
-def get_predictions(self):
-    return self.predictions
+    #To get the prediction through the model
+    def get_predictions(self):
+        return self.predictions
 
 
 
