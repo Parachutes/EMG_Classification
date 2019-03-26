@@ -1,3 +1,4 @@
+#DONE
 #Shichao.Ma$$$IndividualProject
 #The KNN classifier
 from sklearn.neighbors import KNeighborsClassifier
