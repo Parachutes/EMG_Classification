@@ -1,3 +1,4 @@
+#DONE
 #Shichao.Ma$$$IndividualProject
 #This is the Conventional Neural Network
 import numpy as np
