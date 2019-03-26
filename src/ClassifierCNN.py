@@ -63,7 +63,7 @@ class ClassifierCNN:
  
         
         model.add(keras.layers.Flatten())
-        model.add(keras.layers.Dense(500, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
+        #model.add(keras.layers.Dense(500, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
         model.add(keras.layers.Dense(200, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
         model.add(keras.layers.Dense(150, activation='tanh', kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
         model.add(keras.layers.Dropout(0.5))
