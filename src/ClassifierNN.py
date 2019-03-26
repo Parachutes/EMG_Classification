@@ -1,3 +1,4 @@
+#DONE
 #Shichao.Ma$$$IndividualProject
 #This is the Traditional Neural Network Classifier
 
