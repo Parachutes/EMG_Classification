@@ -76,7 +76,7 @@ def wavelet_analyse(data):
 def extract_features_1(data):
     feature_matrix = []
     for row in data:
-        feature_matrix.append([Utility.get_mean_absolute_value(row)])
+        feature_matrix.append([Utility.get_mean_absolute_value(row), Utility.get_waveform_length(row)])
     return feature_matrix
 
 def extract_features_2(data):
