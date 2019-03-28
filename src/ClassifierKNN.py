@@ -27,7 +27,7 @@ class ClassifierKNN:
     def get_predictions(self):     
         
         #TODO to be deleted
-        print(len(self.data_training[0]))
+        print("Number of features: ", len(self.data_training[0]))
         
         neigh = KNeighborsClassifier(n_neighbors=5)
         neigh.fit(self.data_training, self.label_training)
