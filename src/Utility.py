@@ -36,8 +36,7 @@ def get_willison_amplitude(values, threshold):
     return np.sum(np.absolute(np.diff(values)) >= threshold)
 
 def get_skewness(values):
-    return skew(values)
-    #return np.absolute(skew(values))
+    return np.absolute(skew(values))
 
 
 
