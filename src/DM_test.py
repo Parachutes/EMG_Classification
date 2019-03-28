@@ -76,7 +76,7 @@ def wavelet_analyse(data):
 def extract_features_1(data):
     feature_matrix = []
     for row in data:
-        feature_matrix.append([Utility.get_mean_absolute_value(row), Utility.get_root_mean_square(row)])
+        feature_matrix.append([Utility.get_mean_absolute_value(row)])
     return feature_matrix
 
 def extract_features_2(data):
@@ -161,9 +161,9 @@ def write_features_windowing(crop_size, window_size, interval):
                 print(">>>>", new_filename)
                 with open(new_filename, 'w', newline='') as f:
                     writer = csv.writer(f)
-                    #writer.writerows(features_list)
+                    writer.writerows(features_list)
                     #writer.writerows([features_list_1])
-                    writer.writerows([features_list_2])
+                    #writer.writerows([features_list_2])
                 
                     counter = counter + 1
 
