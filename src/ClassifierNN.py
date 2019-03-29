@@ -40,6 +40,8 @@ class ClassifierNN:
     #The constructor
     def __init__(self, data_training, label_training, data_testing):
 
+        self.predictions = []
+        
         self.data_training = [d.flatten() for d in data_training]
         self.input_size = len(self.data_training[0])
         self.data_training = np.array(self.data_training).reshape(len(data_training), self.input_size)
