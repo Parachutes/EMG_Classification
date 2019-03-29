@@ -60,7 +60,7 @@ class ClassifierNN:
         model.add(keras.layers.Dense(180, activation='relu'))
         model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(180, activation='relu'))
-        model.add(keras.layers.Dropout(0.4))
+        model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
         #Optimizers
         opt = keras.optimizers.Adam(lr=0.0005)
