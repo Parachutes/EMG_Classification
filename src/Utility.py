@@ -67,8 +67,8 @@ def collect_data_with_windowing(directory, data, labels, subject, index):
 
 def collect_testing_data_with_windowing(directory, data, labels, subject, index):
     for s in subject:
-        #for m in ["HC_", "I_I", "I_M", "IMR", "L_L", "M_M", "M_R", "MRL", "R_L", "R_R", "T_I", "T_L", "T_M", "T_R", "T_T"]:
-        for m in ["HC_"]:
+        for m in ["HC_", "I_I", "I_M", "IMR", "L_L", "M_M", "M_R", "MRL", "R_L", "R_R", "T_I", "T_L", "T_M", "T_R", "T_T"]:
+        #for m in ["HC_"]:
             for i in index:
                 combination_matrix = []
                 for filename in os.listdir(directory):
