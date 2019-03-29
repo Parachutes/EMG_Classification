@@ -67,10 +67,10 @@ class ClassifierNN:
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=5, verbose=0, mode='auto', baseline=None, restore_best_weights=False)
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0, mode='auto', baseline=None, restore_best_weights=False)
         model.fit(self.data_training, self.label_training,
                   epochs=2000,
-                  batch_size=20,
+                  batch_size=50,
                   callbacks=[early_stopping],
                   shuffle=True)
         
