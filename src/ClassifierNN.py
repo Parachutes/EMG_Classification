@@ -10,7 +10,7 @@ from tensorflow import keras
 import random as rn
 import os
 from pathlib import Path
-#from keras.utils import plot_model
+from statistics import mean
 
 
 #To avoid some randomness
@@ -121,5 +121,6 @@ for i in range(10):
     
 
 print(result_list)
+print(mean(result_list))
 
 
