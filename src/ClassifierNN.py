@@ -55,12 +55,12 @@ class ClassifierNN:
     def train_the_model(self):
         model = keras.models.Sequential()
         #The layers of NN
-        model.add(keras.layers.Dense(180, activation='relu', input_dim=self.input_size))
-        model.add(keras.layers.Dropout(0.4))
-        model.add(keras.layers.Dense(180, activation='relu'))
-        model.add(keras.layers.Dropout(0.4))
-        model.add(keras.layers.Dense(180, activation='relu'))
-        model.add(keras.layers.Dropout(0.5))
+        model.add(keras.layers.Dense(120, activation='relu', input_dim=self.input_size))
+        model.add(keras.layers.Dropout(0.3))
+        model.add(keras.layers.Dense(120, activation='relu'))
+        model.add(keras.layers.Dropout(0.3))
+        model.add(keras.layers.Dense(120, activation='relu'))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
         #Optimizers
         opt = keras.optimizers.Adam(lr=0.0005)
