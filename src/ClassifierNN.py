@@ -36,7 +36,7 @@ class ClassifierNN:
     predictions = []
     input_size = 0
 
-    regularizer = keras.regularizers.l2(l=0.00005)
+    regularizer = keras.regularizers.l2(l=0.00007)
 
     #The constructor
     def __init__(self, data_training, label_training, data_testing):
@@ -57,14 +57,14 @@ class ClassifierNN:
         model = keras.models.Sequential()
         #The layers of NN
         model.add(keras.layers.Dense(225, activation='relu', input_dim=self.input_size, kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
-        model.add(keras.layers.Dropout(0.2))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Dense(225, activation='relu', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.Dense(225, activation='relu', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
         #Optimizers
-        opt = keras.optimizers.Adam(lr=0.0008, decay=1e-6)
+        opt = keras.optimizers.Adam(lr=0.0007, decay=1e-6)
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
