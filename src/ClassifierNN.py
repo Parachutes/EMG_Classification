@@ -69,7 +69,7 @@ class ClassifierNN:
         
         #Optimizers
         #opt = keras.optimizers.Adam(lr=0.0005, decay=1e-6)
-        opt = keras.optimizers.SGD(lr=0.0005, momentum=0.0, decay=0.0, nesterov=False)
+        opt = keras.optimizers.SGD(lr=0.00005, momentum=0.0, decay=0.0, nesterov=False)
         
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
