@@ -57,7 +57,7 @@ class ClassifierNN:
         model = keras.models.Sequential()
         #The layers of NN
         model.add(keras.layers.Dense(120, activation='relu', input_dim=self.input_size, kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
-        model.add(keras.layers.Dropout(0.4))
+        #model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.Dense(120, activation='relu', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.Dense(120, activation='relu', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.Dropout(0.5))
