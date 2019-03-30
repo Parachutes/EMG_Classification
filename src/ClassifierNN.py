@@ -75,7 +75,7 @@ class ClassifierNN:
         model.fit(self.data_training, self.label_training,
                   epochs=2000,
                   batch_size=5,
-                  #callbacks=[early_stopping],
+                  callbacks=[early_stopping],
                   shuffle=True)
         
         #plot_model(model, to_file='model.png')
