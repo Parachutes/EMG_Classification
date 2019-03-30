@@ -71,7 +71,7 @@ class ClassifierNN:
         early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=30, verbose=0, mode='auto', baseline=None, restore_best_weights=False)
         model.fit(self.data_training, self.label_training,
                   epochs=2000,
-                  batch_size=80,
+                  batch_size=20,
                   callbacks=[early_stopping],
                   shuffle=True)
         
