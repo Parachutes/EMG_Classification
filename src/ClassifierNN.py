@@ -66,8 +66,11 @@ class ClassifierNN:
         model.add(keras.layers.Dropout(0.4))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.Dense(15, activation=tf.nn.softmax))
+        
         #Optimizers
-        opt = keras.optimizers.Adam(lr=0.0005, decay=1e-6)
+        #opt = keras.optimizers.Adam(lr=0.0005, decay=1e-6)
+        opt = keras.optimizers.SGD(lr=0.0005, momentum=0.0, decay=0.0, nesterov=False)
+        
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
