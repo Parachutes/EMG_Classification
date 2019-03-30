@@ -57,10 +57,10 @@ class ClassifierNN:
         model = keras.models.Sequential()
         #The layers of NN
         model.add(keras.layers.Dense(225, activation='relu', input_dim=self.input_size, kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
-        model.add(keras.layers.Dropout(0.2))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.Dense(225, activation='relu', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
-        model.add(keras.layers.Dropout(0.2))
+        model.add(keras.layers.Dropout(0.3))
         model.add(keras.layers.BatchNormalization())
         model.add(keras.layers.Dense(225, activation='relu', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.Dropout(0.4))
@@ -71,7 +71,7 @@ class ClassifierNN:
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0, mode='auto', baseline=None, restore_best_weights=False)
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=20, verbose=0, mode='auto', baseline=None, restore_best_weights=False)
         model.fit(self.data_training, self.label_training,
                   epochs=2000,
                   batch_size=32,
