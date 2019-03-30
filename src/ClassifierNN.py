@@ -73,9 +73,9 @@ class ClassifierNN:
                       metrics=['accuracy'])
         early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=40, verbose=0, mode='auto', baseline=None, restore_best_weights=False)
         model.fit(self.data_training, self.label_training,
-                  epochs=2000,
+                  epochs=140,
                   batch_size=32,
-                  callbacks=[early_stopping],
+                  #callbacks=[early_stopping],
                   shuffle=True)
         
         #plot_model(model, to_file='model.png')
