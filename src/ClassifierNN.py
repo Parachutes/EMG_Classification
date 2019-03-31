@@ -36,7 +36,7 @@ class ClassifierNN:
     predictions = []
     input_size = 0
 
-    regularizer = keras.regularizers.l2(l=0.000075)
+    regularizer = keras.regularizers.l2(l=0.00008)
 
     #The constructor
     def __init__(self, data_training, label_training, data_testing):
@@ -69,7 +69,7 @@ class ClassifierNN:
         
         #Optimizers
         #opt = keras.optimizers.Adam(lr=0.0005, decay=1e-6)
-        opt = keras.optimizers.Adagrad(lr=0.0005, epsilon=None, decay=0.0)
+        opt = keras.optimizers.Adagrad(lr=0.0005, epsilon=None, decay=1e-6)
         
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
