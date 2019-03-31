@@ -36,7 +36,7 @@ class ClassifierNN:
     predictions = []
     input_size = 0
 
-    regularizer = keras.regularizers.l2(l=0.00008)
+    regularizer = keras.regularizers.l2(l=0.000075)
 
     #The constructor
     def __init__(self, data_training, label_training, data_testing):
@@ -69,12 +69,12 @@ class ClassifierNN:
         
         #Optimizers
         #opt = keras.optimizers.Adam(lr=0.0005, decay=1e-6)
-        opt = keras.optimizers.Adagrad(lr=0.0005, epsilon=None, decay=1e-6)
+        opt = keras.optimizers.Adagrad(lr=0.0005, epsilon=None, decay=0)
         
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=50, verbose=0, mode='auto', baseline=None, restore_best_weights=False)
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=70, verbose=0, mode='auto', baseline=None, restore_best_weights=False)
         model.fit(self.data_training, self.label_training,
                   epochs=2000,
                   batch_size=400,
