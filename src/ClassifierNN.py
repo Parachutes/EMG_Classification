@@ -74,10 +74,10 @@ class ClassifierNN:
         model.compile(loss='mean_squared_error',
                       optimizer=opt,
                       metrics=['accuracy'])
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=150, verbose=0, mode='auto', baseline=None, restore_best_weights=False)
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=50, verbose=0, mode='auto', baseline=None, restore_best_weights=False)
         model.fit(self.data_training, self.label_training,
                   epochs=3000,
-                  batch_size=1500,
+                  batch_size=150,
                   callbacks=[early_stopping],
                   shuffle=True)
         
@@ -111,7 +111,7 @@ x_test = []
 y_test = []
 
 Utility.collect_data_with_windowing(path_dataset, x_train, y_train, ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"], ["1", "2"])
-Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S3"], ["3"])
+Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"], ["3"])
 
 
 result_list = []
