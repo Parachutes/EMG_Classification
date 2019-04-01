@@ -85,9 +85,9 @@ class ClassifierCNN:
         opt = keras.optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
         model.compile(loss='mean_squared_error', optimizer=opt, metrics=['accuracy'])
             
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=5, verbose=0, mode='auto', baseline=None)
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0, mode='auto', baseline=None)
 
-        model.fit(self.data_training,self.label_training, epochs=800, batch_size=100, shuffle=True, callbacks=[early_stopping])
+        model.fit(self.data_training,self.label_training, epochs=800, batch_size=20, shuffle=True, callbacks=[early_stopping])
                       
                       
                       
