@@ -131,6 +131,6 @@ classifierCNN = ClassifierCNN(x_train, y_train, x_test)
 
 print(np.array(classifierCNN.data_training).shape)
 
-#classifierCNN.train_the_model()
-#print("The CNN Accuracy: ", Utility.get_accuracy(classifierCNN.get_predictions(), y_test))
+classifierCNN.train_the_model()
+print("The CNN Accuracy: ", Utility.get_accuracy(classifierCNN.get_predictions(), y_test))
 
