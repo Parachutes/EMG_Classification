@@ -46,6 +46,8 @@ class ClassifierCNN:
                 matrix_2D = np.array(r).reshape(100,100,1)
                 matrix_3D.append(matrix_2D)
             self.data_training.append(matrix_3D)
+            
+        self.data_training = np.array(self.data_training)
         
         
         self.label_training = [Utility.label_str2array(l) for l in label_training]
