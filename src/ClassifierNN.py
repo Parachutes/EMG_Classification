@@ -37,7 +37,7 @@ class ClassifierNN:
     input_size = 0
 
     #regularizer = keras.regularizers.l2(l=0.000075)
-    regularizer = keras.regularizers.l2(l=0.003)
+    regularizer = keras.regularizers.l2(l=0.0015)
 
     #The constructor
     def __init__(self, data_training, label_training, data_testing):
