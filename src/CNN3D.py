@@ -64,17 +64,17 @@ class ClassifierCNN:
 
 
 
-        model.add(keras.layers.Conv3D(filters=5, kernel_size=(3,5,5), activation=keras.layers.LeakyReLU(alpha=0.3), input_shape=(8,100,100,1), kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv3D(filters=10, kernel_size=(3,5,5), activation=keras.layers.LeakyReLU(alpha=0.3), input_shape=(8,100,100,1), kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         
-        model.add(keras.layers.MaxPooling3D(pool_size=(1,2,2)))
+        model.add(keras.layers.AveragePooling3D(pool_size=(1,2,2)))
         
-        model.add(keras.layers.Conv3D(filters=5, kernel_size=(3,3,3), activation=keras.layers.LeakyReLU(alpha=0.3), kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv3D(filters=10, kernel_size=(3,3,3), activation=keras.layers.LeakyReLU(alpha=0.3), kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         
-        model.add(keras.layers.MaxPooling3D(pool_size=(1,2,2)))
+        model.add(keras.layers.AveragePooling3D(pool_size=(1,2,2)))
         
-        model.add(keras.layers.Conv3D(filters=3, kernel_size=(3,4,4), activation=keras.layers.LeakyReLU(alpha=0.3), kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv3D(filters=5, kernel_size=(3,4,4), activation=keras.layers.LeakyReLU(alpha=0.3), kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         
-        model.add(keras.layers.MaxPooling3D(pool_size=(2,2,2)))
+        model.add(keras.layers.AveragePooling3D(pool_size=(2,2,2)))
 
         model.add(keras.layers.Flatten())
         model.add(keras.layers.Dense(200, activation=keras.layers.LeakyReLU(alpha=0.3), kernel_regularizer=self.regularizer, activity_regularizer=self.regularizer))
