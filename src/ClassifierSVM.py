@@ -54,4 +54,4 @@ classifierSVM = ClassifierSVM(x_train, y_train, x_test)
 print("The SVM Accuracy: ", Utility.get_accuracy(classifierSVM.get_predictions(), y_test))
 
 
-print(y_test[])
+print(y_test)
