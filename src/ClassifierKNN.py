@@ -26,9 +26,6 @@ class ClassifierKNN:
 
     def get_predictions(self):     
         
-        #TODO to be deleted
-        print("Number of features: ", len(self.data_training[0]))
-        
         neigh = KNeighborsClassifier(n_neighbors=5)
         neigh.fit(self.data_training, self.label_training)
         
@@ -37,7 +34,9 @@ class ClassifierKNN:
             prediction = neigh.predict(d_t)
             prediction = prediction.tolist()
             #!!!important:max() randomly choose one if two elements are tied, which causes th inconsistency 
-            self.predictions.append(max(set(prediction), key=prediction.count))           
+            self.predictions.append(max(set(prediction), key=prediction.count))   
+        
+        print(self.predictions)
         return self.predictions
 
 
@@ -63,6 +62,5 @@ print("The KNN Accuracy: ", Utility.get_accuracy(classifierKNN.get_predictions()
 
 print(">>>>>>>>>>>>real")
 print(y_test)
-print(">>>>>>>>>>>>prediction")
-print(classifierKNN.get_predictions())
+
 
