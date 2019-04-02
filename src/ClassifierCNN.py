@@ -70,8 +70,7 @@ class ClassifierCNN:
                       optimizer=opt,
                       metrics=['accuracy'])
             
-        #patience = 10
-        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=7, verbose=0,
+        early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0,
                                                                      mode='auto', baseline=None)
         model.fit(self.data_training,self.label_training,
                         epochs=800,
