@@ -81,7 +81,6 @@ class ClassifierNN:
                   callbacks=[early_stopping],
                   shuffle=True)
         
-        #plot_model(model, to_file='model.png')
 
 
         # Do the prediction
@@ -96,7 +95,6 @@ class ClassifierNN:
 
     #To get the prediction through the model
     def get_predictions(self):
-        print(self.predictions)
         return self.predictions
 
 
@@ -128,7 +126,6 @@ result = Utility.get_accuracy(classifierNN.get_predictions(), y_test)
     
 print("The NN Accuracy: ",result)
 
-print(y_test)
     
 
 #print(result_list)
