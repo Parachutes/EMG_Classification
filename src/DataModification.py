@@ -94,7 +94,8 @@ def write_raw_windowing(crop_size, window_size, interval):
             original_matrix = Utility.read_csv(f)
             
             #Do the normalization
-            original_matrix_norm = keras.utils.normalize(original_matrix)
+            #original_matrix_norm = keras.utils.normalize(original_matrix)
+            original_matrix_norm = original_matrix
             
             rotated_matrix = rotate_raw_data(original_matrix_norm)
             cropped_matrix = crop_data(rotated_matrix, crop_size)
