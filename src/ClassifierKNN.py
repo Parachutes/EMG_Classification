@@ -60,3 +60,9 @@ Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1",
 
 classifierKNN = ClassifierKNN(x_train, y_train, x_test)
 print("The KNN Accuracy: ", Utility.get_accuracy(classifierKNN.get_predictions(), y_test))
+
+print(">>>>>>>>>>>>real")
+print(y_test)
+print(">>>>>>>>>>>>prediction")
+print(classifierKNN.get_predictions())
+
