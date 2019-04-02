@@ -116,7 +116,7 @@ Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1",
 
 result_list = []
 
-for i in range(3):
+for i in range(5):
     print("attempt: ", i+1)
     classifierCNN = ClassifierCNN(x_train, y_train, x_test)
     classifierCNN.train_the_model()
