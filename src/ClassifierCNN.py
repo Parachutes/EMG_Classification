@@ -9,6 +9,8 @@ import random as rn
 from pathlib import Path
 import os
 
+from statistics import mean
+
 #To avoid some randomness
 import os
 os.environ['PYTHONHASHSEED']=str(1)
@@ -106,12 +108,23 @@ y_test = []
 Utility.collect_data_with_windowing(path_dataset, x_train, y_train, ["S1", "S2", "S3","S4", "S5", "S6","S7", "S8"], ["1","2"])
 Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1", "S2", "S3","S4", "S5", "S6","S7", "S8"], ["3"])
 
-print("Hello World")
 
-classifierCNN = ClassifierCNN(x_train, y_train, x_test)
-classifierCNN.train_the_model()
-print("The CNN Accuracy: ", Utility.get_accuracy(classifierCNN.get_predictions(), y_test))
 
+
+
+result_list = []
+
+for i in range(3):
+    print("attempt: ", i+1)
+    classifierCNN = ClassifierCNN(x_train, y_train, x_test)
+    classifierCNN.train_the_model()
+    result = Utility.get_accuracy(classifierCNN.get_predictions(), y_test)
+    result_list.append(result)
+    print("The CNN Accuracy: ",result)
+    
+
+print(result_list)
+print(mean(result_list))
 
 
 
