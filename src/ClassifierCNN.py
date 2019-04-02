@@ -40,6 +40,8 @@ class ClassifierCNN:
         
         #Tricks in "reshape"
         
+        self.predictions = []
+        
         self.data_training = np.array(data_training).reshape(len(data_training),4000,8,1)
         self.label_training = [Utility.label_str2array(l) for l in label_training]
         self.label_training = np.array(self.label_training).reshape(len(label_training), 15)
