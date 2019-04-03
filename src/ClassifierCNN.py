@@ -114,7 +114,7 @@ classifierCNN = ClassifierCNN(x_train, y_train, x_test)
 classifierCNN.train_the_model()
 result = Utility.get_accuracy(classifierCNN.get_predictions(), y_test)
 print("The CNN Accuracy: ",result)
-    
+print(classifierCNN.get_predictions())
 
 
 
