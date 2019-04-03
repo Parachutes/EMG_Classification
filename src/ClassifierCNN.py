@@ -40,12 +40,9 @@ class ClassifierCNN:
         
         #Tricks in "reshape"
         
-        self.predictions = []
-        
         self.data_training = np.array(data_training).reshape(len(data_training),4000,8,1)
         self.label_training = [Utility.label_str2array(l) for l in label_training]
-        self.label_training = np.array(self.label_training).reshape(len(label_training), 15)
-        
+        self.label_training = np.array(self.label_training).reshape(len(label_training), 15)  
         self.data_testing = data_testing
     
     
@@ -55,10 +52,10 @@ class ClassifierCNN:
         model = keras.models.Sequential()
         model.add(keras.layers.Conv2D(filters=5, kernel_size=(50,8), activation='tanh', input_shape=(4000,8,1), padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(4,2)))
-        model.add(keras.layers.Dropout(0.5))
+        model.add(keras.layers.Dropout(0.2)) #0.5
         model.add(keras.layers.Conv2D(filters=5, kernel_size=(20,4), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
-        model.add(keras.layers.Dropout(0.5))
+        model.add(keras.layers.Dropout(0.2)) #0.5
         model.add(keras.layers.Conv2D(filters=5, kernel_size=(10,2), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.5))
@@ -75,24 +72,21 @@ class ClassifierCNN:
         early_stopping = keras.callbacks.EarlyStopping(monitor='acc', patience=10, verbose=0,
                                                                      mode='auto', baseline=None)
         model.fit(self.data_training,self.label_training,
-                        epochs=800,
-                        batch_size=20, 
-                        shuffle=True,
-                        callbacks=[early_stopping])
-                      
-                      
-                      
+                                epochs=800,
+                                batch_size=20,
+                                shuffle=True,
+                                callbacks=[early_stopping])
+                                        
         # Do the prediction
         for d_t in self.data_testing:
-              d_t = np.array(d_t).reshape(len(d_t),4000,8,1)
-              prediction = model.predict(d_t)
-              prediction = [Utility.label_num2str(np.argmax(p)) for p in prediction]
-              self.predictions.append(max(set(prediction), key=prediction.count))
+            d_t = np.array(d_t).reshape(len(d_t),4000,8,1)
+            prediction = model.predict(d_t)
+            prediction = [Utility.label_num2str(np.argmax(p)) for p in prediction]
+            self.predictions.append(max(set(prediction), key=prediction.count))
 
 
     #To get the prediction through the model
     def get_predictions(self):
-        #print(self.predictions)
         return self.predictions
 
 
@@ -115,21 +109,13 @@ Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1",
 
 
 
-result_list = []
 
-for i in range(5):
-    print("attempt: ", i+1)
-    classifierCNN = ClassifierCNN(x_train, y_train, x_test)
-    classifierCNN.train_the_model()
-    result = Utility.get_accuracy(classifierCNN.get_predictions(), y_test)
-    result_list.append(result)
-    print("The CNN Accuracy: ",result)
-    
-    #print(y_test)
+classifierCNN = ClassifierCNN(x_train, y_train, x_test)
+classifierCNN.train_the_model()
+result = Utility.get_accuracy(classifierCNN.get_predictions(), y_test)
+print("The CNN Accuracy: ",result)
     
 
-print(result_list)
-print(mean(result_list))
 
 
 
