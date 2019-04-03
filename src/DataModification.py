@@ -30,9 +30,12 @@ def rotate_raw_data(raw_data):
 #Add noise to the raw data (on sample) for testing robustness
 #input: signal with 8 rows and 80000 columns
 #output: signal with 8 rows and 80000 columns with extra noise
-#TODO unfinished
-def add_noise():
-    return 0
+def add_noise(rotated_matrix, std):
+    noisy_matrix = []
+    for row in rotated_matrix:
+        noise = np.random.normal(0,std,len(row))
+        noisy_matrix.append(noise + np.array(row))
+    return noisy_matrix
 
 #Crop the signal if necessary
 #input: signal with 8 rows and 80000 columns
@@ -167,9 +170,85 @@ def write_features_windowing(crop_size, window_size, interval):
 
 
 
+                
+                
+                
+                
+#add noise
+def write_noisy_raw_windowing(crop_size, window_size, interval):
+    for filename in os.listdir(path_raw):
+        if filename.endswith(".csv"):
+            os.chdir(path_raw)
+            f = open(filename)
+            original_matrix = Utility.read_csv(f)
+            #0.000001, 0.000005, 0.00001
+            noisy_matrix = add_noise(original_matrix, 0.000001)
+            rotated_noisy_matrix = rotate_raw_data(noisy_matrix)
+            #Do the normalization
+            rotated_matrix_norm = keras.utils.normalize(rotated_noisy_matrix)
+            cropped_matrix = crop_data(rotated_matrix_norm, crop_size)
+            components_list = data_windowing(cropped_matrix, window_size, interval)
+            cropped_filename = os.path.splitext(filename)[0][0:7] + "_"
+            counter = 0
+            for component in components_list:
+                os.chdir(path_raw_windowing_noisy)
+                new_filename = cropped_filename + str(counter).zfill(2) + ".csv"
+                print(">>>>", new_filename)
+                with open(new_filename, 'w', newline='') as f:
+                    writer = csv.writer(f)
+                    writer.writerows(component)
+                counter = counter + 1 
+
+                
+def write_noisy_features_windowing(crop_size, window_size, interval):
+    for filename in os.listdir(path_raw):
+        if filename.endswith(".csv"):
+            os.chdir(path_raw)
+            f = open(filename)
+            original_matrix = Utility.read_csv(f)
+            rotated_matrix = rotate_raw_data(original_matrix)
+            #0.000001, 0.000005, 0.00001
+            noisy_matrix = add_noise(rotated_matrix, 0.000001)
+            cropped_matrix = crop_data(noisy_matrix, crop_size)
+            components_list = data_windowing(cropped_matrix, window_size, interval)
+            cropped_filename = os.path.splitext(filename)[0][0:7] + "_"
+            counter = 0
+            for component in components_list:
+                wavelet_analysed_component = wavelet_analyse(component)
+                #(MAV + WL + WAMP + Skew)
+                features_component_1 = extract_features_1(component)
+                #Wavelet(MAV + RMS)
+                features_component_2 = extract_features_2(wavelet_analysed_component)
+                #Do the normalization
+                norm_component_1 = []
+                features_component_1 = np.array(features_component_1)
+                for i in range(len(features_component_1[0])):
+                    norm_array_1 = keras.utils.normalize(features_component_1[:,i]).flatten()
+                    norm_component_1.append(norm_array_1)
+                norm_component_2 = []
+                features_component_2 = np.array(features_component_2)
+                for i in range(len(features_component_2[0])):
+                    norm_array_2 = keras.utils.normalize(features_component_2[:,i]).flatten()
+                    norm_component_2.append(norm_array_2)
+                features_list_1 = np.array(norm_component_1).flatten()
+                features_list_2 = np.array(norm_component_2).flatten()
+                features_list = [np.concatenate((features_list_1, features_list_2))]
+                os.chdir(path_features_windowing_noisy)
+                new_filename = cropped_filename + str(counter).zfill(2) + ".csv"
+                print(">>>>", new_filename)
+                with open(new_filename, 'w', newline='') as f:
+                    writer = csv.writer(f)
+                    writer.writerows(features_list)
+                    counter = counter + 1
 
 
+                
+                
+                
 
-write_raw_windowing(20000, 4000, 1000)
+#write_raw_windowing(20000, 4000, 1000)
 #write_features_windowing(80000, 20000, 4000)
 #write_raw_windowing(40000, 10000, 2000)
+
+write_noisy_raw_windowing(20000, 4000, 1000)
+write_noisy_features_windowing(80000, 20000, 4000)
