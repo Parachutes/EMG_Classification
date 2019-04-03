@@ -92,7 +92,7 @@ class ClassifierCNN:
 
     #To get the prediction through the model
     def get_predictions(self):
-        print(self.predictions)
+        #print(self.predictions)
         return self.predictions
 
 
@@ -125,7 +125,7 @@ for i in range(5):
     result_list.append(result)
     print("The CNN Accuracy: ",result)
     
-    print(y_test)
+    #print(y_test)
     
 
 print(result_list)
