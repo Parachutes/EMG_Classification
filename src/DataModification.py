@@ -35,6 +35,11 @@ def add_noise(rotated_matrix, std):
     for row in rotated_matrix:
         noise = np.random.normal(0,std,len(row))
         noisy_matrix.append(noise + np.array(row))
+        
+        print(noise)
+        print(row)
+        print(noise + np.array(row))
+        
     return noisy_matrix
 
 #Crop the signal if necessary
