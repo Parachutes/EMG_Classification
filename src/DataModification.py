@@ -93,14 +93,13 @@ def write_raw_windowing(crop_size, window_size, interval):
             f = open(filename)
             original_matrix = Utility.read_csv(f)
             
-            
-            rotated_matrix = rotate_raw_data(original_matrix)
+           
             
             #Do the normalization
-            rotated_matrix_norm = keras.utils.normalize(rotated_matrix)
+            matrix_norm = keras.utils.normalize(original_matrix)
             
-            #rotated_matrix = rotate_raw_data(original_matrix_norm)
-            cropped_matrix = crop_data(rotated_matrix_norm, crop_size)
+            rotated_matrix = rotate_raw_data(matrix_norm)
+            cropped_matrix = crop_data(rotated_matrix, crop_size)
             
             components_list = data_windowing(cropped_matrix, window_size, interval)
             cropped_filename = os.path.splitext(filename)[0][0:7] + "_"
