@@ -34,12 +34,7 @@ def add_noise(rotated_matrix, std):
     noisy_matrix = []
     for row in rotated_matrix:
         noise = np.random.normal(0,std,len(row))
-        noisy_matrix.append(noise + np.array(row))
-        
-        print(noise)
-        print(row)
-        print(noise + np.array(row))
-        
+        noisy_matrix.append(noise + np.array(row)) 
     return noisy_matrix
 
 #Crop the signal if necessary
@@ -213,7 +208,7 @@ def write_noisy_features_windowing(crop_size, window_size, interval):
             original_matrix = Utility.read_csv(f)
             rotated_matrix = rotate_raw_data(original_matrix)
             #0.000001, 0.000005, 0.00001
-            noisy_matrix = add_noise(rotated_matrix, 1)
+            noisy_matrix = add_noise(rotated_matrix, 0.0001)
             cropped_matrix = crop_data(noisy_matrix, crop_size)
             components_list = data_windowing(cropped_matrix, window_size, interval)
             cropped_filename = os.path.splitext(filename)[0][0:7] + "_"
