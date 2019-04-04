@@ -133,11 +133,14 @@ classifierCNN.train_the_model()
 
 result = Utility.get_accuracy(classifierCNN.get_predictions(), y_test)
 print("The CNN Accuracy: ",result)
+print(len(classifierCNN.get_predictions()))
+print(len(y_test))
 
 
 result_2 = Utility.get_accuracy(classifierCNN.get_predictions_2(), y_test_2)
 print("The CNN Accuracy on noisy training set: ",result_2)
-
+print(len(classifierCNN.get_predictions_2()))
+print(len(y_test_2))
 
 
 
