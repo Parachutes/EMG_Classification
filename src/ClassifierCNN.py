@@ -101,7 +101,7 @@ class ClassifierCNN:
     def get_predictions(self):
         return self.predictions
     
-    def get_predictions_2(self)
+    def get_predictions_2(self):
         return self.predictions_2
 
 
