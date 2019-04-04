@@ -128,7 +128,7 @@ Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1",
 
 
 
-classifierCNN = ClassifierCNN(x_train, y_train, x_test)
+classifierCNN = ClassifierCNN(x_train, y_train, x_test, x_test_2)
 classifierCNN.train_the_model()
 result = Utility.get_accuracy(classifierCNN.get_predictions(), y_test)
 print("The CNN Accuracy: ",result)
