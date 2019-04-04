@@ -208,11 +208,14 @@ def write_noisy_features_windowing(crop_size, window_size, interval):
             os.chdir(path_raw)
             f = open(filename)
             original_matrix = Utility.read_csv(f)
-            rotated_matrix = rotate_raw_data(original_matrix)
+            
+            noisy_matrix = add_noise(original_matrix, 0.00005)
+            
+            rotated_matrix = rotate_raw_data(noisy_matrix)
             #0.00001, 0.00005, 0.0001
             #0.001 <
-            noisy_matrix = add_noise(rotated_matrix, 0.00005)
-            cropped_matrix = crop_data(noisy_matrix, crop_size)
+            #noisy_matrix = add_noise(rotated_matrix, 0.00005)
+            cropped_matrix = crop_data(rotated_matrix, crop_size)
             components_list = data_windowing(cropped_matrix, window_size, interval)
             cropped_filename = os.path.splitext(filename)[0][0:7] + "_"
             counter = 0
@@ -253,5 +256,5 @@ def write_noisy_features_windowing(crop_size, window_size, interval):
 #write_features_windowing(80000, 20000, 4000)
 #write_raw_windowing(40000, 10000, 2000)
 
-write_noisy_raw_windowing(20000, 4000, 1000)
+#write_noisy_raw_windowing(20000, 4000, 1000)
 write_noisy_features_windowing(80000, 20000, 4000)
