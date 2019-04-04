@@ -46,7 +46,8 @@ class ClassifierKNN:
 #Script part
 current_path = os.path.abspath(os.path.dirname(__file__))
 current_path_parent = str(Path(current_path).parent)
-path_dataset = current_path_parent + '/data/features_windowing_noisy'
+path_dataset = current_path_parent + '/data/features_windowing'
+path_dataset_noisy = current_path_parent + '/data/features_windowing_noisy'
 
 x_train = []
 y_train = []
@@ -54,7 +55,7 @@ x_test = []
 y_test = []
 
 Utility.collect_data_with_windowing(path_dataset, x_train, y_train, ["S1","S2","S3","S4","S5","S6","S7","S8"], ["1", "2"])
-Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1","S2","S3","S4","S5","S6","S7","S8"], ["3"])
+Utility.collect_testing_data_with_windowing(path_dataset_noisy, x_test, y_test, ["S1","S2","S3","S4","S5","S6","S7","S8"], ["3"])
 
 classifierKNN = ClassifierKNN(x_train, y_train, x_test)
 print("The KNN Accuracy: ", Utility.get_accuracy(classifierKNN.get_predictions(), y_test))
