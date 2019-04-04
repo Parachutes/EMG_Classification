@@ -38,7 +38,7 @@ class ClassifierSVM:
 #Script part
 current_path = os.path.abspath(os.path.dirname(__file__))
 current_path_parent = str(Path(current_path).parent)
-path_dataset = current_path_parent + '/data/features_windowing'
+path_dataset = current_path_parent + '/data/features_windowing_noisy'
 
 x_train = []
 y_train = []
