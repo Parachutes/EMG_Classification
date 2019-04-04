@@ -35,8 +35,11 @@ class ClassifierCNN:
     regularizer = keras.regularizers.l2(l=0.00012)
     
     
+    data_testing_2 = []
+    predictions_2 = []
     
-    def __init__(self, data_training, label_training, data_testing):
+    
+    def __init__(self, data_training, label_training, data_testing, data_testing_2):
         
         #Tricks in "reshape"
         
@@ -44,6 +47,8 @@ class ClassifierCNN:
         self.label_training = [Utility.label_str2array(l) for l in label_training]
         self.label_training = np.array(self.label_training).reshape(len(label_training), 15)  
         self.data_testing = data_testing
+        
+        self.data_testing_2 = data_testing_2
     
     
     
@@ -83,11 +88,21 @@ class ClassifierCNN:
             prediction = model.predict(d_t)
             prediction = [Utility.label_num2str(np.argmax(p)) for p in prediction]
             self.predictions.append(max(set(prediction), key=prediction.count))
+            
+            
+        for d_t in self.data_testing_2:
+            d_t = np.array(d_t).reshape(len(d_t),4000,8,1)
+            prediction = model.predict(d_t)
+            prediction = [Utility.label_num2str(np.argmax(p)) for p in prediction]
+            self.predictions_2.append(max(set(prediction), key=prediction.count))
 
 
     #To get the prediction through the model
     def get_predictions(self):
         return self.predictions
+    
+    def get_predictions_2(self)
+        return self.predictions_2
 
 
 
@@ -106,7 +121,10 @@ Utility.collect_data_with_windowing(path_dataset, x_train, y_train, ["S1", "S2",
 Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1", "S2", "S3","S4", "S5", "S6","S7", "S8"], ["3"])
 
 
+x_test_2 = []
+y_test_2 = []
 
+Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1", "S2", "S3","S4", "S5", "S6","S7", "S8"], ["1","2"])
 
 
 
@@ -114,7 +132,11 @@ classifierCNN = ClassifierCNN(x_train, y_train, x_test)
 classifierCNN.train_the_model()
 result = Utility.get_accuracy(classifierCNN.get_predictions(), y_test)
 print("The CNN Accuracy: ",result)
-print(classifierCNN.get_predictions())
+
+
+result_2 = Utility.get_accuracy(classifierCNN.get_predictions_2(), y_test_2)
+print("The CNN Accuracy on noisy training set: ",result)
+
 
 
 
