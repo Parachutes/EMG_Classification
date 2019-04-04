@@ -136,7 +136,7 @@ print("The CNN Accuracy: ",result)
 
 
 result_2 = Utility.get_accuracy(classifierCNN.get_predictions_2(), y_test_2)
-print("The CNN Accuracy on noisy training set: ",result)
+print("The CNN Accuracy on noisy training set: ",result_2)
 
 
 
