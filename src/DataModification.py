@@ -182,7 +182,7 @@ def write_noisy_raw_windowing(crop_size, window_size, interval):
             f = open(filename)
             original_matrix = Utility.read_csv(f)
             #0.000001, 0.000005, 0.00001
-            noisy_matrix = add_noise(original_matrix, 0.00001)
+            noisy_matrix = add_noise(original_matrix, 0.00005)
             
             noisy_matrix_norm = keras.utils.normalize(noisy_matrix)
             
