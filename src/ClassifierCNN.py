@@ -41,7 +41,7 @@ class ClassifierCNN:
         
         #Tricks in "reshape"
         
-        self.data_training = np.array(data_training).reshape(len(data_training),8,4000,1)
+        self.data_training = np.array(data_training).reshape(len(data_training),4000,8,1)
         self.label_training = [Utility.label_str2array(l) for l in label_training]
         self.label_training = np.array(self.label_training).reshape(len(label_training), 15)  
         self.data_testing = data_testing
@@ -52,13 +52,13 @@ class ClassifierCNN:
     
     def train_the_model(self):
         model = keras.models.Sequential()
-        model.add(keras.layers.Conv2D(filters=5, kernel_size=(8,50), activation='tanh', input_shape=(8,4000,1), padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
-        model.add(keras.layers.MaxPooling2D(pool_size=(2,4)))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(50,8), activation='tanh', input_shape=(4000,8,1), padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.MaxPooling2D(pool_size=(4,2)))
         model.add(keras.layers.Dropout(0.5))
-        model.add(keras.layers.Conv2D(filters=5, kernel_size=(4,20), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(20,4), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.5))
-        model.add(keras.layers.Conv2D(filters=5, kernel_size=(2,10), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
+        model.add(keras.layers.Conv2D(filters=5, kernel_size=(10,2), activation='tanh', padding='same', kernel_regularizer=self.regularizer, bias_regularizer=self.regularizer))
         model.add(keras.layers.MaxPooling2D(pool_size=(2,2)))
         model.add(keras.layers.Dropout(0.5))
         model.add(keras.layers.Flatten())
@@ -81,7 +81,7 @@ class ClassifierCNN:
                                         
         # Do the prediction
         for d_t in self.data_testing:
-            d_t = np.array(d_t).reshape(len(d_t),8,4000,1)
+            d_t = np.array(d_t).reshape(len(d_t),4000,8,1)
             prediction = model.predict(d_t)
             prediction = [Utility.label_num2str(np.argmax(p)) for p in prediction]
             self.predictions.append(max(set(prediction), key=prediction.count))
