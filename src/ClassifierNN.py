@@ -111,25 +111,16 @@ x_test = []
 y_test = []
 
 Utility.collect_data_with_windowing(path_dataset, x_train, y_train, ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"], ["1", "2"])
-Utility.collect_testing_data_with_windowing(path_dataset_noisy, x_test, y_test, ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"], ["1", "2"])
+Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8"], ["1", "2"])
 
 
-#result_list = []
 
-#for i in range(5):
-    #print("attempt: ", i+1)
     
 classifierNN = ClassifierNN(x_train, y_train, x_test)
 classifierNN.train_the_model()
-result = Utility.get_accuracy(classifierNN.get_predictions(), y_test)
-    
-    #result_list.append(result)
-    
+result = Utility.get_accuracy(classifierNN.get_predictions(), y_test)    
 print("The NN Accuracy: ",result)
 
     
-
-#print(result_list)
-#print(mean(result_list))
 
 
