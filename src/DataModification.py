@@ -181,8 +181,8 @@ def write_noisy_raw_windowing(crop_size, window_size, interval):
             os.chdir(path_raw)
             f = open(filename)
             original_matrix = Utility.read_csv(f)
-            #0.000001, 0.000005, 0.00001
-            noisy_matrix = add_noise(original_matrix, 0.00005)
+            #0.000001, 0.000003, 0.000005
+            noisy_matrix = add_noise(original_matrix, 0.00003)
             
             noisy_matrix_norm = keras.utils.normalize(noisy_matrix)
             
@@ -209,10 +209,10 @@ def write_noisy_features_windowing(crop_size, window_size, interval):
             f = open(filename)
             original_matrix = Utility.read_csv(f)
             
-            noisy_matrix = add_noise(original_matrix, 0.00005)
+            noisy_matrix = add_noise(original_matrix, 0.00003)
             
             rotated_matrix = rotate_raw_data(noisy_matrix)
-            #0.00001, 0.00005, 0.0001
+            #0.00001, 0.00003, 0.00005
             #0.001 <
             #noisy_matrix = add_noise(rotated_matrix, 0.00005)
             cropped_matrix = crop_data(rotated_matrix, crop_size)
@@ -256,5 +256,5 @@ def write_noisy_features_windowing(crop_size, window_size, interval):
 #write_features_windowing(80000, 20000, 4000)
 #write_raw_windowing(40000, 10000, 2000)
 
-#write_noisy_raw_windowing(20000, 4000, 1000)
+write_noisy_raw_windowing(20000, 4000, 1000)
 write_noisy_features_windowing(80000, 20000, 4000)
