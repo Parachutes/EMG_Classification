@@ -1,4 +1,3 @@
-#DONE
 #Shichao.Ma$$$IndividualProject
 #The SVM Classifier
 from sklearn import svm
@@ -20,7 +19,6 @@ class ClassifierSVM:
         self.label_training = [Utility.label_str2num(label) for label in label_training]
         self.data_testing = data_testing
 
-
     def get_predictions(self):
         clf = svm.SVC(C = 8, gamma = 0.18)
         clf.fit(self.data_training, self.label_training)
@@ -31,11 +29,8 @@ class ClassifierSVM:
             self.predictions.append(max(set(prediction), key=prediction.count))
         return self.predictions
 
-
-
-
-
-#Script part
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#Executable part
 current_path = os.path.abspath(os.path.dirname(__file__))
 current_path_parent = str(Path(current_path).parent)
 path_dataset = current_path_parent + '/data/features_windowing'
@@ -51,6 +46,4 @@ Utility.collect_testing_data_with_windowing(path_dataset, x_test, y_test, ["S1",
 
 classifierSVM = ClassifierSVM(x_train, y_train, x_test)
 print("The SVM Accuracy: ", Utility.get_accuracy(classifierSVM.get_predictions(), y_test))
-
-
 
