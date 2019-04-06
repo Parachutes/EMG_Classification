@@ -8,10 +8,9 @@ import random as rn
 from pathlib import Path
 import os
 
-from statistics import mean
+
 
 #To avoid some randomness
-import os
 os.environ['PYTHONHASHSEED']=str(1)
 np.random.seed(1)
 rn.seed(1)
