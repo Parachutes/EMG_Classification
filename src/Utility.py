@@ -1,6 +1,5 @@
 import pywt
 import numpy as np
-#from statsmodels.tsa.ar_model import AR
 from scipy.stats import skew
 import os
 import csv
@@ -11,12 +10,10 @@ import re
 #$$$$ functions for feature extraction
 
 #From matrix to wavelet analysed matrix
-#Per channel contains 6 components: cA4, cD4, cD3, cD2, cD1, recD2
+#Per channel contains 5 components: cA4, cD4, cD3, recD1, recD2
 def wavelet_analysis(channel):
     coeffs = pywt.wavedec(channel, 'db7', level=4)
     cA4, cD4, cD3, cD2, cD1 = coeffs
-    #recD2 = pywt.waverec([cD2], 'db7')
-    #wavelet_analysed_channel = [cA4, cD4, cD3, cD2, cD1, recD2]
     recD1 = pywt.waverec([cD1], 'db7')
     recD2 = pywt.waverec([cD2], 'db7')
     wavelet_analysed_channel = [cA4, cD4, cD3, recD1, recD2]
@@ -80,7 +77,6 @@ def collect_testing_data_with_windowing(directory, data, labels, subject, index)
                         combination_matrix.append(matrix)
                 data.append(combination_matrix)
                 labels.append(m)
-
 
 
 
