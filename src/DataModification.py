@@ -16,7 +16,6 @@ path_raw_windowing = current_path_parent + '/data/raw_windowing'
 path_raw_windowing_noisy = current_path_parent + '/data/raw_windowing_noisy'
 
 
-
 #Rotate the raw data (one sample) for easier process
 #input: signal with 80000 rows and 8 columns
 #output: signal with 8 rows and 80000 columns
@@ -28,8 +27,8 @@ def rotate_raw_data(raw_data):
     return rotated_data
 
 #Add noise to the raw data (on sample) for testing robustness
-#input: signal with 8 rows and 80000 columns
-#output: signal with 8 rows and 80000 columns with extra noise
+#input: signal with x rows and y columns
+#output: signal with x rows and y columns with extra noise
 def add_noise(rotated_matrix, std):
     noisy_matrix = []
     for row in rotated_matrix:
@@ -94,16 +93,11 @@ def write_raw_windowing(crop_size, window_size, interval):
         if filename.endswith(".csv"):
             os.chdir(path_raw)
             f = open(filename)
-            original_matrix = Utility.read_csv(f)
-            
-           
-            
+            original_matrix = Utility.read_csv(f)         
             #Do the normalization
-            matrix_norm = keras.utils.normalize(original_matrix)
-            
+            matrix_norm = keras.utils.normalize(original_matrix)    
             rotated_matrix = rotate_raw_data(matrix_norm)
             cropped_matrix = crop_data(rotated_matrix, crop_size)
-            
             components_list = data_windowing(cropped_matrix, window_size, interval)
             cropped_filename = os.path.splitext(filename)[0][0:7] + "_"
             counter = 0
@@ -127,18 +121,14 @@ def write_features_windowing(crop_size, window_size, interval):
             rotated_matrix = rotate_raw_data(original_matrix)
             cropped_matrix = crop_data(rotated_matrix, crop_size)
             components_list = data_windowing(cropped_matrix, window_size, interval)
-
             cropped_filename = os.path.splitext(filename)[0][0:7] + "_"
             counter = 0
             for component in components_list:
-
                 wavelet_analysed_component = wavelet_analyse(component)
-
-                #(MAV + WL + WAMP + Skew)
+                #(MAV + WL + WAMP + abs(Skew))
                 features_component_1 = extract_features_1(component)
                 #Wavelet(MAV + RMS)
                 features_component_2 = extract_features_2(wavelet_analysed_component)
-
                 #Do the normalization
                 norm_component_1 = []
                 features_component_1 = np.array(features_component_1)
@@ -163,9 +153,6 @@ def write_features_windowing(crop_size, window_size, interval):
                 with open(new_filename, 'w', newline='') as f:
                     writer = csv.writer(f)
                     writer.writerows(features_list)
-                    #writer.writerows([features_list_1])
-                    #writer.writerows([features_list_2])
-                    
                 counter = counter + 1
 
 
@@ -174,20 +161,16 @@ def write_features_windowing(crop_size, window_size, interval):
                 
                 
                 
-#add noise
-def write_noisy_raw_windowing(crop_size, window_size, interval):
+#The following two functions are similar to the two functions above, they will write noisy data into corresponding directories
+def write_noisy_raw_windowing(crop_size, window_size, interval, sigma):
     for filename in os.listdir(path_raw):
         if filename.endswith(".csv"):
             os.chdir(path_raw)
             f = open(filename)
             original_matrix = Utility.read_csv(f)
-            #0.000001, 0.000003, 0.000005
-            noisy_matrix = add_noise(original_matrix, 0.00003)
-            
+            noisy_matrix = add_noise(original_matrix, sigma)     
             noisy_matrix_norm = keras.utils.normalize(noisy_matrix)
-            
             rotated_noisy_matrix_norm = rotate_raw_data(noisy_matrix_norm)
-    
             cropped_matrix = crop_data(rotated_noisy_matrix_norm, crop_size)
             components_list = data_windowing(cropped_matrix, window_size, interval)
             cropped_filename = os.path.splitext(filename)[0][0:7] + "_"
@@ -202,28 +185,21 @@ def write_noisy_raw_windowing(crop_size, window_size, interval):
                 counter = counter + 1 
 
                 
-def write_noisy_features_windowing(crop_size, window_size, interval):
+def write_noisy_features_windowing(crop_size, window_size, interval, sigma):
     for filename in os.listdir(path_raw):
         if filename.endswith(".csv"):
             os.chdir(path_raw)
             f = open(filename)
             original_matrix = Utility.read_csv(f)
-            
-            noisy_matrix = add_noise(original_matrix, 0.00003)
-            
+            noisy_matrix = add_noise(original_matrix, sigma)
             rotated_matrix = rotate_raw_data(noisy_matrix)
-            #0.00001, 0.00003, 0.00005
-            #0.001 <
-            #noisy_matrix = add_noise(rotated_matrix, 0.00005)
             cropped_matrix = crop_data(rotated_matrix, crop_size)
             components_list = data_windowing(cropped_matrix, window_size, interval)
             cropped_filename = os.path.splitext(filename)[0][0:7] + "_"
             counter = 0
             for component in components_list:
                 wavelet_analysed_component = wavelet_analyse(component)
-                #(MAV + WL + WAMP + Skew)
                 features_component_1 = extract_features_1(component)
-                #Wavelet(MAV + RMS)
                 features_component_2 = extract_features_2(wavelet_analysed_component)
                 #Do the normalization
                 norm_component_1 = []
@@ -252,9 +228,7 @@ def write_noisy_features_windowing(crop_size, window_size, interval):
                 
                 
 
-#write_raw_windowing(20000, 4000, 1000)
-#write_features_windowing(80000, 20000, 4000)
-#write_raw_windowing(40000, 10000, 2000)
-
-write_noisy_raw_windowing(20000, 4000, 1000)
-write_noisy_features_windowing(80000, 20000, 4000)
+write_raw_windowing(20000, 4000, 1000)
+write_features_windowing(80000, 20000, 4000)
+#write_noisy_raw_windowing(20000, 4000, 1000, 0.00001)
+#write_noisy_features_windowing(80000, 20000, 4000, 0.00001)
