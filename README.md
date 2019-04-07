@@ -8,3 +8,4 @@ All the source code in repository is written in Python and developed by Shichao 
 
 To run the code make sure that you have at least installed Python 3 (3.6 is preferable) and TensorFlow (a GPU version is preferable) in your computer.
 
+There are some external libraries imported in the source code so you need to install following 
