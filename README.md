@@ -40,7 +40,7 @@ There are some external libraries imported in the source code so you need to ins
   
     python3 DataModification.py
     
-This process usually takes around 15 minutes and the size of combination of Dataset_A and Dataset_B around   GB. After two new datasets are produced, you can then do the classification by simply executing relevant classifier files under the directory "/src".
+This process usually takes around 15 minutes and the size of combination of Dataset_A and Dataset_B around 4 GB. After two new datasets are produced, you can then do the classification by simply executing relevant classifier files under the directory "/src".
 
     python3 ClassifierKNN.py
     
