@@ -66,8 +66,12 @@ PS. Please be patient when you are doing the classification on the CNN classifie
 
 
 Shichao Ma
+
 7th April 2019
 
+6CCS3PRJ Individual Project
+
+King's College London, Department of Informatics
 
 
 
