@@ -2,7 +2,7 @@
 
 This repository contains the source code and datasets used in the Shichao Ma's individual project.
 
-Currently there is only the original dataset which contains the raw EMG samples included in the repository. The original dataset is from EMG DATASETS REPOSITORY (https://www.rami-khushaba.com/electromyogram-emg-repository.html) and all the samples are contributed by the owner of the repository and his colleagues. (R. N. Khushaba and Sarath Kodagoda, “Electromyogram (EMG) Feature Reduction Using Mutual Components Analysis for Multifunction Prosthetic Fingers Control”‏, in Proc. Int. Conf. on Control, Automation, Robotics & Vision (ICARCV), Guangzhou, 2012, pp. 1534-1539. (6 pages)) 
+Currently there is only the original dataset (data/raw) which contains the raw EMG samples included in the repository. The original dataset is from EMG DATASETS REPOSITORY (https://www.rami-khushaba.com/electromyogram-emg-repository.html) and all the samples are contributed by the owner of the repository and his colleagues. (R. N. Khushaba and Sarath Kodagoda, “Electromyogram (EMG) Feature Reduction Using Mutual Components Analysis for Multifunction Prosthetic Fingers Control”‏, in Proc. Int. Conf. on Control, Automation, Robotics & Vision (ICARCV), Guangzhou, 2012, pp. 1534-1539. (6 pages)) 
 
 All the source code in repository is written in Python and developed by Shichao Ma.
 
@@ -36,9 +36,25 @@ There are some external libraries imported in the source code so you need to ins
   
   
   
-  Once all these packages have been successfully installed and this repository has been cloned to the local, you can start to produce Dataset_A and Dataset_B (for more details about Dataset_A and Dataset_B please check the report) by simply executing "DataModification.py". 
+  Once all these packages have been successfully installed and this repository has been cloned to the local, you can start to produce Dataset_A (data/features_windowing) and Dataset_B (data/raw_windowing) (for more details about Dataset_A and Dataset_B please check the report) by simply executing "DataModification.py" under the directory "/src". 
   
     python3 DataModification.py
     
-This process usually takes around ten minutes and
+This process usually takes around ten minutes and the size of combination of Dataset_A and Dataset_B around   GB. After two new datasets are produced, you can then do the classification by simply executing relevant classifier files under the directory "/src".
+
+    python3 ClassifierKNN.py
+    
+    python3 ClassifierSVM.py
+    
+    python3 ClassifierNN.py
+    
+All of these three classifiers will classify the samples in Dataset_A.
+
+    python3 ClassifierCNN.py
+    
+Convolutonal neural network will classify the samples in Dataset_B.
+
+The accuracies will be given in the end of execution of each classifier.
+
+
   
