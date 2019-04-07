@@ -1,5 +1,5 @@
 #Shichao.Ma$$$IndividualProject
-#This is the Traditional Neural Network Classifier
+#This is the Deep Feed Forward Neural Network Classifier
 
 import numpy as np
 import tensorflow as tf
