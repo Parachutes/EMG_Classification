@@ -2,7 +2,7 @@
 
 This repository contains the source code and datasets used in the Shichao Ma's individual project.
 
-The original dataset is from EMG DATASETS REPOSITORY (https://www.rami-khushaba.com/electromyogram-emg-repository.html) and all the samples are contributed by the owner of the repository and his colleagues. (R. N. Khushaba and Sarath Kodagoda, “Electromyogram (EMG) Feature Reduction Using Mutual Components Analysis for Multifunction Prosthetic Fingers Control”‏, in Proc. Int. Conf. on Control, Automation, Robotics & Vision (ICARCV), Guangzhou, 2012, pp. 1534-1539. (6 pages)) 
+Currently there is only the original dataset which contains the raw EMG samples included in the repository. The original dataset is from EMG DATASETS REPOSITORY (https://www.rami-khushaba.com/electromyogram-emg-repository.html) and all the samples are contributed by the owner of the repository and his colleagues. (R. N. Khushaba and Sarath Kodagoda, “Electromyogram (EMG) Feature Reduction Using Mutual Components Analysis for Multifunction Prosthetic Fingers Control”‏, in Proc. Int. Conf. on Control, Automation, Robotics & Vision (ICARCV), Guangzhou, 2012, pp. 1534-1539. (6 pages)) 
 
 All the source code in repository is written in Python and developed by Shichao Ma.
 
@@ -36,6 +36,9 @@ There are some external libraries imported in the source code so you need to ins
   
   
   
-  After all these packages have been successfully installed, 
+  Once all these packages have been successfully installed and this repository has been cloned to the local, you can start to produce Dataset_A and Dataset_B (for more details about Dataset_A and Dataset_B please check the report) by simply executing "DataModification.py". 
   
+    python3 DataModification.py
+    
+This process usually takes around ten minutes and
   
