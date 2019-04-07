@@ -29,3 +29,8 @@ There are some external libraries imported in the source code so you need to ins
   4). keras
   
     You can install it by executing "pip3 install keras" in your command line.    
+    
+  5). sklearn
+  
+    You can install it by executing "pip3 install sklearn" in your command line. 
+  
