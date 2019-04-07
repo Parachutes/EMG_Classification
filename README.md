@@ -60,7 +60,14 @@ If you want to testify the robustness of each classifer, you can execute the "wr
 
 You can also freely select different samples as training samples and test samples by simply modifying some parameters in classifer files. In the report the first two trials contributed by each subject are selected as the training samples and the last trials are selected as the test sample.
 
+    Utility.collect_data_with_windowing(path_dataset, x_train, y_train, ["S1","S2","S3","S4","S5","S6","S7","S8"], ["1", "2"])
+
 PS. Please be patient when you are doing the classification on the CNN classifier, it takes around 10 minutes to collect data from csv files and the training takes around 20 minutes if you are using powerful GPUs (such as NVIDIA Tesla K80 offered by Google Cloud Platform). However, the training may take several days if you are using CPUs :-(
+
+
+Shichao Ma
+7th April 2019
+
 
 
 
