@@ -6,7 +6,7 @@ The original dataset is from EMG DATASETS REPOSITORY (https://www.rami-khushaba.
 
 All the source code in repository is written in Python and developed by Shichao Ma.
 
-To run the code make sure that you have at least installed Python 3 (3.5 or 3.6 is preferable) and TensorFlow (a GPU version is preferable, the CPU version also works but it usually take ages to finish the classification. If you are using the GPU version then make sure that relevant drivers such as the NIVIDIA driver have been installed as well) in your computer.
+To run the code make sure that you have at least installed Python 3 (3.5 or 3.6 is preferable) and TensorFlow (a GPU version is strongly recommanded, the CPU version also works but it usually take ages to finish the classification. If you are using the GPU version then make sure that relevant drivers such as the NIVIDIA driver have been installed as well) in your computer.
 
 There are some external libraries imported in the source code so you need to install following packages:
 
@@ -33,4 +33,9 @@ There are some external libraries imported in the source code so you need to ins
   5). sklearn
   
     You can install it by executing "pip3 install sklearn" in your command line. 
+  
+  
+  
+  After all these packages have been successfully installed, 
+  
   
