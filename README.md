@@ -40,7 +40,7 @@ There are some external libraries imported in the source code so you need to ins
   
     python3 DataModification.py
     
-This process usually takes around ten minutes and the size of combination of Dataset_A and Dataset_B around   GB. After two new datasets are produced, you can then do the classification by simply executing relevant classifier files under the directory "/src".
+This process usually takes around 15 minutes and the size of combination of Dataset_A and Dataset_B around   GB. After two new datasets are produced, you can then do the classification by simply executing relevant classifier files under the directory "/src".
 
     python3 ClassifierKNN.py
     
@@ -55,6 +55,12 @@ All of these three classifiers will classify the samples in Dataset_A.
 Convolutonal neural network will classify the samples in Dataset_B.
 
 The accuracies will be given in the end of execution of each classifier.
+
+If you want to testify the robustness of each classifer, you can execute the "write_noisy_raw_windowing(crop_size, window_size, interval, sigma)" and "write_noisy_features_windowing(crop_size, window_size, interval, sigma)" these two functions in the DataModification.py and two more noisy dataset (data/features_windowing_noisy and data/raw_windowing_noisy ) will be produced. After that, you can change the directory of test dataset in corresponding classifier file to get the accuracy on the noisy dataset.
+
+You can also freely select different samples as training samples and test samples by simply modifying some parameters in classifer files. In the report the first two trials contributed by each subject are selected as the training samples and the last trials are selected as the test sample.
+
+
 
 
   
