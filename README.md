@@ -65,6 +65,11 @@ You can also freely select different samples as training samples and test sample
 PS. Please be patient when you are doing the classification on the CNN classifier, it takes around 10 minutes to collect data from csv files and the training takes around 20 minutes if you are using powerful GPUs (such as NVIDIA Tesla K80 offered by Google Cloud Platform). However, the training may take several days if you are using CPUs :-(
 
 
+
+
+
+
+
 Shichao Ma
 
 7th April 2019
