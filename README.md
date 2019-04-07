@@ -6,7 +6,7 @@ Currently there is only the original dataset (data/raw) which contains the raw E
 
 All the source code in repository is written in Python and developed by Shichao Ma.
 
-To run the code make sure that you have at least installed Python 3 (3.5 or 3.6 is preferable) and TensorFlow (a GPU version is strongly recommanded, the CPU version also works but it usually take ages to finish the classification. If you are using the GPU version then make sure that relevant drivers such as the NIVIDIA driver have been installed as well) in your computer.
+To run the code make sure that you have at least installed Python 3 (3.5 or 3.6 is preferable) and TensorFlow (a GPU version is strongly recommanded, the CPU version also works but it usually take ages to finish the classification of convolutional neural network. If you are using the GPU version then make sure that relevant drivers such as the NIVIDIA driver have been installed as well) in your computer.
 
 There are some external libraries imported in the source code so you need to install following packages:
 
@@ -59,6 +59,9 @@ The accuracies will be given in the end of execution of each classifier.
 If you want to testify the robustness of each classifer, you can execute the "write_noisy_raw_windowing(crop_size, window_size, interval, sigma)" and "write_noisy_features_windowing(crop_size, window_size, interval, sigma)" these two functions in the DataModification.py and two more noisy dataset (data/features_windowing_noisy and data/raw_windowing_noisy ) will be produced. After that, you can change the directory of test dataset in corresponding classifier file to get the accuracy on the noisy dataset.
 
 You can also freely select different samples as training samples and test samples by simply modifying some parameters in classifer files. In the report the first two trials contributed by each subject are selected as the training samples and the last trials are selected as the test sample.
+
+PS. Please be patient when you are doing the classification on the CNN classifier, it takes around 10 minutes to collect data from csv files and the training takes around 20 minutes if you are using powerful GPUs (such as NVIDIA Tesla K80 offered by Google Cloud Platform). However, the training may take several days if you are using CPUs :-(
+
 
 
 
